@@ -1,4 +1,6 @@
-name = "impulse-expert"
-pages_build_output_dir = "./dist"
+name = "impulse-expert-website"
 compatibility_date = "2026-09-30"
+
+[assets]
+directory = "./dist"
 

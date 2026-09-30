@@ -10,15 +10,15 @@ npx wrangler pages dev
 
 The site is also compatible with any static file server pointed at `dist/`.
 
-## Cloudflare Pages
+## Cloudflare Workers
 
-The project is configured through `wrangler.toml`. For a Git-connected Pages project, use:
+The project is configured as a static-assets Worker through `wrangler.toml`.
+
+For Cloudflare Builds, use:
 
 - Build command: leave empty
-- Build output directory: `dist`
-
-For a manual deployment:
+- Deploy command: `npx wrangler deploy`
 
 ```powershell
-npx wrangler pages deploy
+npx wrangler deploy
 ```
