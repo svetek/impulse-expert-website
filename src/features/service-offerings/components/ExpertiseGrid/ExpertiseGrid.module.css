@@ -1,0 +1,142 @@
+.directions {
+    position: relative;
+    padding: 42px 0 46px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #03101e 0%, #020812 100%);
+}
+
+.directions::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            circle at 16% 0%,
+            rgba(0, 172, 255, 0.1),
+            transparent 26%
+        ),
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(0, 142, 255, 0.035),
+            transparent
+        );
+    pointer-events: none;
+}
+
+.directions > .shell {
+    position: relative;
+}
+
+.directions-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.directions-head h2 {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 0;
+    font-size: clamp(1.55rem, 2.4vw, 2.2rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+}
+
+.directions-head h2 span {
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: var(--color-cyan);
+    box-shadow: 0 0 10px rgba(33, 200, 255, 0.6);
+}
+
+.directions-head p {
+    margin: 0;
+    color: #7390aa;
+    font-size: 0.74rem;
+}
+
+.direction-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.direction-card {
+    position: relative;
+    min-height: 156px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 144, 255, 0.52);
+    border-radius: 7px;
+    background: linear-gradient(
+        145deg,
+        rgba(5, 26, 48, 0.86),
+        rgba(3, 15, 31, 0.96)
+    );
+    box-shadow: inset 0 0 24px rgba(0, 95, 190, 0.06);
+    transition:
+        transform 0.2s,
+        border-color 0.2s,
+        background 0.2s;
+}
+
+.direction-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-cyan);
+    background: linear-gradient(
+        145deg,
+        rgba(6, 38, 68, 0.96),
+        rgba(3, 18, 36, 0.98)
+    );
+}
+
+.direction-card h3 {
+    margin: 0;
+    font-size: 0.91rem;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    text-align: center;
+}
+
+@media (max-width: 1000px) {
+    .direction-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .directions {
+        padding: 34px 0 38px;
+    }
+
+    .directions-head {
+        display: block;
+    }
+
+    .directions-head p {
+        margin-top: 11px;
+        font-size: 0.7rem;
+    }
+
+    .direction-grid {
+        padding: 2px 1px 12px;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-color: var(--color-blue) transparent;
+        scrollbar-width: thin;
+    }
+
+    .direction-card {
+        flex: 0 0 min(78vw, 270px);
+        scroll-snap-align: start;
+    }
+}

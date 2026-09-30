@@ -1,0 +1,39 @@
+footer {
+    border-top: 1px solid var(--color-line);
+    background: #01060d;
+}
+
+.footer-inner {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.footer-inner p {
+    margin: 0;
+    color: #70869b;
+}
+
+.footer-inner > small {
+    margin-left: auto;
+    color: #536c83;
+}
+
+@media (max-width: 900px) {
+    .footer-inner {
+        padding: 40px 0;
+        flex-wrap: wrap;
+    }
+
+    .footer-inner > small {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-inner p {
+        display: none;
+    }
+}

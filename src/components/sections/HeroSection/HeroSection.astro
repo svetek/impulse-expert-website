@@ -1,0 +1,48 @@
+---
+import styles from './HeroSection.module.css';
+import { Image } from 'astro:assets';
+import heroImage from '../../../assets/images/hero-datacenter.png';
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+
+interface Props {
+    content: SiteContent['hero'];
+}
+
+const { content } = Astro.props;
+---
+
+<section class:list={[styles['hero']]} aria-labelledby="hero-title">
+    <div class:list={[styles['hero-image']]} aria-hidden="true">
+        <Image
+            class={styles['hero-background']}
+            src={heroImage}
+            alt=""
+            widths={[640, 960, 1280, 1600, 2048]}
+            sizes="100vw"
+            quality="high"
+            priority
+        />
+    </div>
+    <div class:list={[styles['hero-grid']]} aria-hidden="true"></div>
+    <div class:list={['shell', styles['hero-content']]}>
+        <p class="eyebrow">{content.eyebrow}</p>
+        <h1 id="hero-title">
+            {content.title}
+            <br />
+            <span>{content.accent}</span>
+        </h1>
+        <p class:list={[styles['hero-lede']]}>{content.text}</p>
+        <div class:list={[styles['hero-actions']]}>
+            <a class="button" href="#contact">
+                {content.talk} <span aria-hidden="true">→</span>
+            </a>
+            <a class="button button-ghost" href="#services">
+                {content.explore}
+            </a>
+        </div>
+    </div>
+    <div class:list={[styles['scroll-cue']]} aria-hidden="true">
+        <span></span>
+        {content.scroll}
+    </div>
+</section>

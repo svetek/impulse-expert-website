@@ -1,0 +1,58 @@
+---
+import styles from './ServiceItem.module.css';
+import type {
+    ServiceContent,
+    ServiceOfferingsContent,
+} from '../../interfaces/service-content.interface';
+import ServiceVisual from '../ServiceVisual/ServiceVisual.astro';
+
+interface Props {
+    service: ServiceContent;
+    imageAlt: ServiceOfferingsContent['imageAlt'];
+    complianceVisualLabel: string;
+    complianceBadges: ServiceOfferingsContent['complianceBadges'];
+    learnMore: string;
+    alternate?: boolean;
+}
+
+const {
+    service,
+    imageAlt,
+    complianceVisualLabel,
+    complianceBadges,
+    learnMore,
+    alternate = false,
+} = Astro.props;
+---
+
+<article
+    class:list={[
+        styles['service'],
+        'shell',
+        {
+            [styles['service-alt']]: alternate,
+        },
+    ]}
+    id={service.id}
+>
+    <div class:list={[styles['service-copy']]}>
+        <p class:list={[styles['service-kicker']]}>{service.kicker}</p>
+        <h3>{service.title}</h3>
+        <p>{service.text}</p>
+        <ul>
+            {service.items.map((item) => (
+                <li>{item}</li>
+            ))}
+        </ul>
+        <a class:list={[styles['text-link']]} href="#contact">
+            {learnMore} <span aria-hidden="true">→</span>
+        </a>
+    </div>
+    <ServiceVisual
+        serviceId={service.id}
+        imageAlt={imageAlt}
+        complianceVisualLabel={complianceVisualLabel}
+        complianceBadges={complianceBadges}
+        alternate={alternate}
+    />
+</article>

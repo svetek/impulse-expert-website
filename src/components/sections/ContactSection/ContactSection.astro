@@ -1,0 +1,33 @@
+---
+import styles from './ContactSection.module.css';
+import { siteConfig } from '../../../domains/site/config/site.config';
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+
+interface Props {
+    content: SiteContent['contact'];
+}
+
+const { content } = Astro.props;
+---
+
+<section class:list={[styles['cta']]} id="contact" aria-labelledby="cta-title">
+    <div class:list={[styles['cta-grid']]} aria-hidden="true"></div>
+    <div class:list={['shell', styles['cta-inner']]}>
+        <div>
+            <p class="eyebrow cyan">{content.eyebrow}</p>
+            <h2 id="cta-title">{content.title}</h2>
+            <p>{content.text}</p>
+        </div>
+        <div class:list={[styles['cta-actions']]}>
+            <a
+                class:list={['button', styles['button-large']]}
+                href={`mailto:${siteConfig.email}`}
+            >
+                {content.talk} <span aria-hidden="true">→</span>
+            </a>
+            <a class:list={[styles['quiet-link']]} href="#services">
+                {content.explore}
+            </a>
+        </div>
+    </div>
+</section>

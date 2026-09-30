@@ -1,0 +1,181 @@
+import { ServiceId } from '../../../features/service-offerings/enums/service-id.enum';
+import type { SiteContent } from '../../site/interfaces/site-content.interface';
+
+export const en = {
+    locale: 'en',
+    siteName: 'Impulse Expert',
+    seo: {
+        title: 'Impulse Expert — Cloud, Kubernetes, Web3 & AI Infrastructure',
+        description:
+            'Secure, scalable cloud, Kubernetes, Web3 and AI infrastructure: architecture, deployment, monitoring and compliance-ready operations.',
+        socialImageAlt: 'Glowing cloud infrastructure network',
+    },
+    header: {
+        switchLocale: 'RU',
+        alternateLanguageName: 'Русский',
+        navLabel: 'Main navigation',
+        openMenu: 'Open menu',
+        closeMenu: 'Close menu',
+        homeLabel: 'Impulse Expert home',
+        nav: [
+            ['Services', '#services'],
+            ['Solutions', '#solutions'],
+            ['Why Impulse', '#why'],
+            ['Infrastructure', '#infrastructure'],
+            ['About', '#about'],
+        ],
+        talk: 'Talk to an Expert',
+        switchLanguageLabel: 'Русская версия',
+    },
+    hero: {
+        eyebrow: 'Reliable infrastructure for innovators',
+        title: 'Build without',
+        accent: 'limits.',
+        text: 'We deploy, manage and secure infrastructure for Web3, cloud and AI — so your team can focus on what matters.',
+        talk: 'Talk to an Expert',
+        explore: 'Explore Services',
+        scroll: 'Explore infrastructure',
+    },
+    services: {
+        eyebrow: 'Designed for what comes next',
+        title: 'Infrastructure for what’s next.',
+        intro: 'From decentralized networks to enterprise cloud and AI workloads, we deliver secure, scalable and high-performance infrastructure for innovative teams.',
+        expertise: 'Our Expertise',
+        expertiseIntro: 'End-to-end solutions for modern business challenges',
+        learnMore: 'Learn more',
+        items: [
+            {
+                id: ServiceId.Infrastructure,
+                short: 'Cloud Infrastructure',
+                kicker: 'Cloud architecture',
+                title: 'Cloud Infrastructure',
+                text: 'Flexible and secure cloud environments, designed around the way your team builds and grows.',
+                items: [
+                    'Multi-cloud across AWS, Azure & GCP',
+                    'Scalable compute and storage',
+                    'Load balancing & auto-scaling',
+                    'Disaster recovery and backup',
+                ],
+            },
+            {
+                id: ServiceId.Kubernetes,
+                short: 'Kubernetes & DevOps',
+                kicker: 'Platform engineering',
+                title: 'Kubernetes & Containers',
+                text: 'Production-ready Kubernetes environments for scalable and resilient workloads.',
+                items: [
+                    'Kubernetes cluster setup',
+                    'Container orchestration',
+                    'CI/CD integration',
+                    'Monitoring, scaling & hardening',
+                ],
+            },
+            {
+                id: ServiceId.Web3,
+                short: 'Web3 & Nodes',
+                kicker: 'Decentralized systems',
+                title: 'Web3 & Node Infrastructure',
+                text: 'Run validators, RPC endpoints, rollups and production Web3 workloads on reliable, high-performance infrastructure.',
+                items: [
+                    'Validator & full node deployment',
+                    'Multi-chain support',
+                    'High-uptime architecture',
+                    'Monitoring, alerting & auto-recovery',
+                ],
+            },
+            {
+                id: ServiceId.Compliance,
+                short: 'Compliance-Ready Infrastructure',
+                kicker: 'Security by design',
+                title: 'Compliance-Ready Infrastructure',
+                text: 'Meet regulatory requirements with secure, auditable and resilient environments.',
+                items: [
+                    'ISO 27001 aligned environments',
+                    'SOC 2 ready controls & monitoring',
+                    'Data protection and encryption',
+                    'Access management & audit logging',
+                ],
+            },
+            {
+                id: ServiceId.AiInfrastructure,
+                short: 'AI Infrastructure',
+                kicker: 'Accelerated compute',
+                title: 'AI Infrastructure',
+                text: 'High-performance infrastructure for AI and machine learning, from training to inference.',
+                items: [
+                    'GPU-optimized compute',
+                    'Scalable AI/ML environments',
+                    'Model deployment at scale',
+                    'Secure, cost-optimized setup',
+                ],
+            },
+        ],
+        imageAlt: [
+            'Glowing cloud infrastructure network',
+            'Secure container platform visualization',
+        ],
+        complianceVisualLabel: 'ISO 27001 aligned and SOC 2 ready',
+        complianceBadges: {
+            aligned: 'ALIGNED',
+            ready: 'READY',
+            controls: 'CONTROLS',
+        },
+    },
+    proof: {
+        eyebrow: 'Built for ambitious teams',
+        title: 'Trusted where uptime matters.',
+        metricsLabel: 'Company metrics',
+        metrics: [
+            ['99.99%', 'target uptime'],
+            ['24/7', 'expert monitoring'],
+            ['15+', 'supported networks'],
+            ['<15m', 'response target'],
+        ],
+        quotes: [
+            [
+                'Impulse Expert became a critical part of our validator infrastructure — reliable, responsive and easy to work with.',
+                'James T.',
+                'Core Team',
+                'JT',
+            ],
+            [
+                'Their multi-cloud expertise gave us the flexibility we needed to scale globally.',
+                'Sarah Kim',
+                'CTO',
+                'SK',
+            ],
+            [
+                'Professional, fast and highly knowledgeable. Our go-to infrastructure partner.',
+                'Alex Ryu',
+                'Head of Infrastructure',
+                'AR',
+            ],
+        ],
+    },
+    contact: {
+        eyebrow: 'Let’s build together',
+        title: 'Ready to scale your infrastructure?',
+        text: 'Tell us what you’re building. We’ll map the right path from architecture to operations.',
+        talk: 'Talk to an Expert',
+        explore: 'Explore Services',
+    },
+    footer: {
+        text: 'Infrastructure engineered for momentum.',
+        homeLabel: 'Impulse Expert home',
+    },
+    analytics: {
+        notice: 'We use Google Analytics and Yandex Metrica to understand how the site is used. Analytics starts only with your consent.',
+        accept: 'Accept analytics',
+        decline: 'Decline',
+        preferencesLabel: 'Analytics preferences',
+    },
+    accessibility: {
+        skipToContent: 'Skip to content',
+    },
+    notFound: {
+        title: 'Page not found — Impulse Expert',
+        heading: 'Page not found',
+        description: 'The page may have moved or the address may be incorrect.',
+        action: 'Return home',
+    },
+} satisfies SiteContent;

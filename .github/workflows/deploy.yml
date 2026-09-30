@@ -1,0 +1,41 @@
+name: Build and deploy
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+    workflow_dispatch:
+
+concurrency:
+    group: cloudflare-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+        env:
+            SITE_URL: ${{ vars.SITE_URL || 'https://impulse.expert' }}
+            PUBLIC_GOOGLE_ANALYTICS_ID: ${{ vars.PUBLIC_GOOGLE_ANALYTICS_ID }}
+            PUBLIC_YANDEX_METRIKA_ID: ${{ vars.PUBLIC_YANDEX_METRIKA_ID }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+            - name: Install dependencies
+              run: npm ci
+            - name: Check formatting
+              run: npm run format:check
+            - name: Build
+              run: npm run build
+            - name: Deploy to Cloudflare Workers
+              if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+              run: npx wrangler deploy
+              env:
+                  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

@@ -1,0 +1,130 @@
+---
+import styles from './AnalyticsConsent.module.css';
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+
+interface Props {
+    content: SiteContent['analytics'];
+}
+
+const { content } = Astro.props;
+const rawGoogleAnalyticsId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID?.trim();
+const rawYandexMetrikaId = import.meta.env.PUBLIC_YANDEX_METRIKA_ID?.trim();
+const googleAnalyticsId = /^G-[A-Z0-9]+$/.test(rawGoogleAnalyticsId ?? '')
+    ? rawGoogleAnalyticsId
+    : undefined;
+const yandexMetrikaId = /^[1-9]\d*$/.test(rawYandexMetrikaId ?? '')
+    ? rawYandexMetrikaId
+    : undefined;
+const analyticsEnabled = Boolean(googleAnalyticsId || yandexMetrikaId);
+---
+
+{analyticsEnabled && (
+    <aside
+        class:list={[styles['analytics-consent']]}
+        data-analytics-consent
+        hidden
+        aria-label={content.preferencesLabel}
+    >
+        <p>{content.notice}</p>
+        <div>
+            <button
+                type="button"
+                class="button button-small"
+                data-analytics-accept
+            >
+                {content.accept}
+            </button>
+            <button
+                type="button"
+                class:list={[styles['consent-decline']]}
+                data-analytics-decline
+            >
+                {content.decline}
+            </button>
+        </div>
+    </aside>
+)}
+
+<script
+    is:inline
+    define:vars={{ googleAnalyticsId, yandexMetrikaId, analyticsEnabled }}
+>
+    if (analyticsEnabled) {
+        const consentKey = 'impulse-analytics-consent';
+        const banner = document.querySelector('[data-analytics-consent]');
+        let analyticsLoaded = false;
+
+        const readConsent = () => {
+            try {
+                return localStorage.getItem(consentKey);
+            } catch {
+                return null;
+            }
+        };
+
+        const saveConsent = (value) => {
+            try {
+                localStorage.setItem(consentKey, value);
+            } catch {
+                // Analytics consent still applies for the current page load.
+            }
+        };
+
+        const loadAnalytics = () => {
+            if (analyticsLoaded) return;
+            analyticsLoaded = true;
+
+            if (googleAnalyticsId) {
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(googleAnalyticsId)}`;
+                document.head.append(script);
+                window.dataLayer = window.dataLayer || [];
+                window.gtag = function () {
+                    window.dataLayer.push(arguments);
+                };
+                window.gtag('js', new Date());
+                window.gtag('config', googleAnalyticsId, {
+                    anonymize_ip: true,
+                });
+            }
+
+            if (yandexMetrikaId) {
+                window.ym =
+                    window.ym ||
+                    function () {
+                        (window.ym.a = window.ym.a || []).push(arguments);
+                    };
+                window.ym.l = Date.now();
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://mc.yandex.ru/metrika/tag.js';
+                document.head.append(script);
+                window.ym(Number(yandexMetrikaId), 'init', {
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: false,
+                });
+            }
+        };
+
+        const savedConsent = readConsent();
+        if (savedConsent === 'accepted') loadAnalytics();
+        if (!savedConsent && banner) banner.hidden = false;
+
+        banner
+            ?.querySelector('[data-analytics-accept]')
+            ?.addEventListener('click', () => {
+                saveConsent('accepted');
+                banner.hidden = true;
+                loadAnalytics();
+            });
+        banner
+            ?.querySelector('[data-analytics-decline]')
+            ?.addEventListener('click', () => {
+                saveConsent('declined');
+                banner.hidden = true;
+            });
+    }
+</script>

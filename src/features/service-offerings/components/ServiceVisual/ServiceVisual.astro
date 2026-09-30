@@ -1,0 +1,149 @@
+---
+import styles from './ServiceVisual.module.css';
+import { Image } from 'astro:assets';
+import infrastructureImage from '../../../../assets/images/infra-network.png';
+import { ServiceId } from '../../enums/service-id.enum';
+import type { ServiceOfferingsContent } from '../../interfaces/service-content.interface';
+
+interface Props {
+    serviceId: ServiceId;
+    imageAlt: ServiceOfferingsContent['imageAlt'];
+    complianceVisualLabel: string;
+    complianceBadges: ServiceOfferingsContent['complianceBadges'];
+    alternate?: boolean;
+}
+
+const {
+    serviceId,
+    imageAlt,
+    complianceVisualLabel,
+    complianceBadges,
+    alternate = false,
+} = Astro.props;
+---
+
+{serviceId === ServiceId.Infrastructure && (
+    <div
+        class:list={[
+            styles['service-visual'],
+            styles['visual-image'],
+            styles['infra-crop-a'],
+            {
+                [styles['service-visual-alt']]: alternate,
+            },
+        ]}
+    >
+        <Image
+            class={styles['service-image']}
+            src={infrastructureImage}
+            alt={imageAlt[0]}
+            width={1280}
+            widths={[480, 720, 960, 1280]}
+            sizes="(max-width: 900px) 100vw, 50vw"
+            quality="high"
+            loading="lazy"
+        />
+    </div>
+)}
+{serviceId === ServiceId.Kubernetes && (
+    <div
+        class:list={[
+            styles['service-visual'],
+            styles['visual-image'],
+            styles['infra-crop-b'],
+            {
+                [styles['service-visual-alt']]: alternate,
+            },
+        ]}
+    >
+        <Image
+            class={styles['service-image']}
+            src={infrastructureImage}
+            alt={imageAlt[1]}
+            width={1280}
+            widths={[480, 720, 960, 1280]}
+            sizes="(max-width: 900px) 100vw, 50vw"
+            quality="high"
+            loading="lazy"
+        />
+        <svg
+            class:list={[styles['kube-mark']]}
+            viewBox="0 0 100 100"
+            aria-hidden="true"
+        >
+            <polygon points="50,3 91,27 91,73 50,97 9,73 9,27" />
+            <circle cx="50" cy="50" r="21" />
+            <path d="M50 22v56M22 50h56M31 31l38 38M69 31 31 69" />
+        </svg>
+    </div>
+)}
+{serviceId === ServiceId.Web3 && (
+    <div
+        class:list={[
+            styles['service-visual'],
+            styles['visual-nodes'],
+            {
+                [styles['service-visual-alt']]: alternate,
+            },
+        ]}
+        aria-hidden="true"
+    >
+        <div class:list={[styles['network-lines']]} />
+        <div class:list={[styles['node'], styles['n1']]} />
+        <div class:list={[styles['node'], styles['n2']]} />
+        <div class:list={[styles['node'], styles['n3']]} />
+        <div class:list={[styles['node'], styles['n4']]} />
+        <div class:list={[styles['node-core']]}>
+            <span>◈</span>
+        </div>
+    </div>
+)}
+{serviceId === ServiceId.Compliance && (
+    <div
+        class:list={[
+            styles['service-visual'],
+            styles['compliance-visual'],
+            {
+                [styles['service-visual-alt']]: alternate,
+            },
+        ]}
+        aria-label={complianceVisualLabel}
+        role="img"
+    >
+        <div class:list={[styles['badge']]}>
+            <strong>ISO</strong>
+            <span>27001</span>
+            <small>{complianceBadges.aligned}</small>
+        </div>
+        <div class:list={[styles['shield']]}>
+            <svg viewBox="0 0 80 94" aria-hidden="true">
+                <path d="M40 3 72 15v27c0 23-14 39-32 49C22 81 8 65 8 42V15Z" />
+                <rect x="27" y="42" width="26" height="23" rx="4" />
+                <path d="M33 42v-7a7 7 0 0 1 14 0v7" />
+            </svg>
+        </div>
+        <div class:list={[styles['badge']]}>
+            <strong>SOC 2</strong>
+            <span>{complianceBadges.ready}</span>
+            <small>{complianceBadges.controls}</small>
+        </div>
+    </div>
+)}
+{serviceId === ServiceId.AiInfrastructure && (
+    <div
+        class:list={[
+            styles['service-visual'],
+            styles['ai-visual'],
+            {
+                [styles['service-visual-alt']]: alternate,
+            },
+        ]}
+        aria-hidden="true"
+    >
+        <div class:list={[styles['ai-chip']]}>
+            <span>AI</span>
+        </div>
+        <div class:list={[styles['orbit'], styles['orbit-a']]} />
+        <div class:list={[styles['orbit'], styles['orbit-b']]} />
+    </div>
+)}

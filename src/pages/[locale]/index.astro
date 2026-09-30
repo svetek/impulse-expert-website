@@ -1,0 +1,26 @@
+---
+import LandingPage from '../../components/pages/LandingPage/LandingPage.astro';
+import {
+    defaultLocale,
+    supportedLocales,
+} from '../../domains/localization/config/locale.config';
+import { content } from '../../domains/localization/data/content';
+import type { SiteContent } from '../../domains/site/interfaces/site-content.interface';
+
+interface Props {
+    pageContent: SiteContent;
+}
+
+export function getStaticPaths() {
+    return supportedLocales
+        .filter((locale) => locale !== defaultLocale)
+        .map((locale) => ({
+            params: { locale },
+            props: { pageContent: content[locale] },
+        }));
+}
+
+const { pageContent } = Astro.props;
+---
+
+<LandingPage content={pageContent} />

@@ -1,0 +1,39 @@
+---
+import AnalyticsConsent from '../components/analytics/AnalyticsConsent/AnalyticsConsent.astro';
+import SeoHead from '../components/seo/SeoHead/SeoHead.astro';
+import type { SiteContent } from '../domains/site/interfaces/site-content.interface';
+import '../styles/global.css';
+
+interface Props {
+    content: SiteContent;
+    pageTitle?: string;
+    pageDescription?: string;
+    robots?: string;
+    canonicalPath?: string | null;
+}
+
+const {
+    content,
+    pageTitle = content.seo.title,
+    pageDescription = content.seo.description,
+    robots = 'index, follow, max-image-preview:large',
+    canonicalPath,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={content.locale}>
+    <head>
+        <SeoHead
+            content={content}
+            pageTitle={pageTitle}
+            pageDescription={pageDescription}
+            robots={robots}
+            canonicalPath={canonicalPath}
+        />
+    </head>
+    <body>
+        <slot />
+        <AnalyticsConsent content={content.analytics} />
+    </body>
+</html>

@@ -1,0 +1,33 @@
+---
+import styles from './ExpertiseGrid.module.css';
+import type { ServiceOfferingsContent } from '../../interfaces/service-content.interface';
+import ServiceIcon from '../ServiceIcon/ServiceIcon.astro';
+
+interface Props {
+    content: ServiceOfferingsContent;
+}
+
+const { content } = Astro.props;
+---
+
+<section class:list={[styles['directions']]} aria-labelledby="directions-title">
+    <div class:list={[styles['shell']]}>
+        <div class:list={[styles['directions-head']]}>
+            <h2 id="directions-title">
+                {content.expertise} <span aria-hidden="true"></span>
+            </h2>
+            <p>{content.expertiseIntro}</p>
+        </div>
+        <div class:list={[styles['direction-grid']]}>
+            {content.items.map((service) => (
+                <a
+                    class:list={[styles['direction-card']]}
+                    href={`#${service.id}`}
+                >
+                    <ServiceIcon serviceId={service.id} />
+                    <h3>{service.short}</h3>
+                </a>
+            ))}
+        </div>
+    </div>
+</section>

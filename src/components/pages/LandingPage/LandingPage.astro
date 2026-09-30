@@ -1,0 +1,56 @@
+---
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+import ServicesSection from '../../../features/service-offerings/components/ServicesSection/ServicesSection.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteFooter from '../../layout/SiteFooter/SiteFooter.astro';
+import SiteHeader from '../../layout/SiteHeader/SiteHeader.astro';
+import ContactSection from '../../sections/ContactSection/ContactSection.astro';
+import HeroSection from '../../sections/HeroSection/HeroSection.astro';
+import ProofSection from '../../sections/ProofSection/ProofSection.astro';
+
+interface Props {
+    content: SiteContent;
+}
+
+const { content } = Astro.props;
+---
+
+<BaseLayout content={content}>
+    <a class="skip-link" href="#main">
+        {content.accessibility.skipToContent}
+    </a>
+    <SiteHeader
+        locale={content.locale}
+        siteName={content.siteName}
+        content={content.header}
+    />
+    <main id="main">
+        <HeroSection content={content.hero} />
+        <ServicesSection content={content.services} />
+        <ProofSection content={content.proof} />
+        <ContactSection content={content.contact} />
+    </main>
+    <SiteFooter
+        locale={content.locale}
+        siteName={content.siteName}
+        content={content.footer}
+    />
+</BaseLayout>
+
+<style>
+    .skip-link {
+        position: fixed;
+        top: -80px;
+        left: 16px;
+        z-index: 100;
+        padding: 10px 14px;
+        border-radius: 4px;
+        background: var(--color-cyan);
+        color: #00101c;
+        font-weight: 800;
+    }
+
+    .skip-link:focus {
+        top: 12px;
+    }
+</style>

@@ -1,0 +1,27 @@
+---
+import styles from './SiteFooter.module.css';
+import { localeConfig } from '../../../domains/localization/config/locale.config';
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+import type { Locale } from '../../../domains/localization/types/locale.type';
+import Brand from '../../ui/Brand/Brand.astro';
+
+interface Props {
+    locale: Locale;
+    siteName: string;
+    content: SiteContent['footer'];
+}
+
+const { locale, siteName, content } = Astro.props;
+const root = localeConfig[locale].path;
+const currentYear = new Date().getFullYear();
+---
+
+<footer id="about">
+    <div class:list={['shell', styles['footer-inner']]}>
+        <Brand href={`${root}#top`} label={content.homeLabel} name={siteName} />
+        <p>{content.text}</p>
+        <small>
+            © {currentYear} {siteName}
+        </small>
+    </div>
+</footer>

@@ -1,0 +1,12 @@
+.direction-icon {
+    width: 44px;
+    height: 44px;
+    margin: 0 0 15px;
+    display: block;
+    fill: none;
+    stroke: var(--color-cyan);
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 7px rgba(0, 184, 255, 0.72));
+}
