@@ -1,0 +1,40 @@
+---
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+interface Props {
+    layout: Pick<SiteContent, 'locale' | 'siteName' | 'seo' | 'analytics'>;
+    skipToContentLabel: string;
+}
+
+const { layout, skipToContentLabel } = Astro.props;
+---
+
+<BaseLayout {...layout}>
+    <a class="skip-link" href="#main">
+        {skipToContentLabel}
+    </a>
+    <slot name="header" />
+    <main id="main">
+        <slot />
+    </main>
+    <slot name="footer" />
+</BaseLayout>
+
+<style>
+    .skip-link {
+        position: fixed;
+        top: -80px;
+        left: 16px;
+        z-index: 100;
+        padding: 10px 14px;
+        border-radius: 4px;
+        background: var(--color-cyan);
+        color: #00101c;
+        font-weight: 800;
+    }
+
+    .skip-link:focus {
+        top: 12px;
+    }
+</style>

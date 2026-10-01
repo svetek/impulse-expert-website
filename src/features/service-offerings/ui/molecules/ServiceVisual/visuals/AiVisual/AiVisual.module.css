@@ -1,0 +1,63 @@
+.visual {
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle, #0a66df33, transparent 55%);
+}
+
+.chip {
+    position: relative;
+    z-index: 3;
+    width: 180px;
+    height: 180px;
+    display: grid;
+    place-items: center;
+    transform: rotate(8deg);
+    border: 3px solid #168cff;
+    background: linear-gradient(145deg, #063064, #02132e);
+    font-size: 4.3rem;
+    font-weight: 900;
+    letter-spacing: -0.08em;
+    text-shadow: 0 0 18px #40d6ff;
+    box-shadow:
+        0 0 16px var(--color-cyan),
+        0 0 70px #064dff,
+        inset 0 0 35px var(--color-blue);
+}
+
+.chip::before,
+.chip::after {
+    content: '';
+    position: absolute;
+    inset: 15px;
+    border: 1px solid rgba(85, 217, 255, 0.65);
+}
+
+.orbit {
+    position: absolute;
+    transform: rotate(-17deg);
+    border: 1px solid rgba(33, 200, 255, 0.26);
+    border-radius: 50%;
+}
+
+.orbit-a {
+    width: 420px;
+    height: 150px;
+}
+
+.orbit-b {
+    width: 320px;
+    height: 300px;
+    transform: rotate(37deg);
+}
+
+@media (max-width: 560px) {
+    .chip {
+        width: 135px;
+        height: 135px;
+        font-size: 3.2rem;
+    }
+
+    .orbit-a {
+        width: 320px;
+    }
+}

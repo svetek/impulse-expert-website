@@ -1,8 +1,10 @@
 ---
 import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
 import { localeConfig } from '../../../domains/localization/config/locale.config';
+import ActionLink from '../../atoms/Action/ActionLink.astro';
+import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+import Brand from '../../molecules/Brand/Brand.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Brand from '../../ui/Brand/Brand.astro';
 
 interface Props {
     content: SiteContent;
@@ -13,7 +15,10 @@ const root = localeConfig[content.locale].path;
 ---
 
 <BaseLayout
-    content={content}
+    locale={content.locale}
+    siteName={content.siteName}
+    seo={content.seo}
+    analytics={content.analytics}
     pageTitle={content.notFound.title}
     pageDescription={content.notFound.description}
     robots="noindex, nofollow"
@@ -27,12 +32,12 @@ const root = localeConfig[content.locale].path;
                 name={content.siteName}
             />
         </div>
-        <p class="eyebrow cyan">404</p>
+        <Eyebrow tone="accent">404</Eyebrow>
         <h1>{content.notFound.heading}</h1>
         <p>{content.notFound.description}</p>
-        <a class="button" href={root}>
+        <ActionLink href={root}>
             {content.notFound.action} <span aria-hidden="true">→</span>
-        </a>
+        </ActionLink>
     </main>
 </BaseLayout>
 
@@ -56,7 +61,7 @@ const root = localeConfig[content.locale].path;
         font-size: clamp(2.8rem, 8vw, 5.8rem);
     }
 
-    .error-page > p:not(.eyebrow) {
+    .error-page > p {
         margin-bottom: 30px;
         color: var(--color-muted);
         font-size: 1.1rem;

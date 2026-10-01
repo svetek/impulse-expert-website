@@ -1,0 +1,41 @@
+---
+import { ServiceId } from '../../../enums/service-id.enum';
+import type { ServiceOfferingsContent } from '../../../interfaces/service-content.interface';
+import AiVisual from './visuals/AiVisual/AiVisual.astro';
+import ComplianceVisual from './visuals/ComplianceVisual/ComplianceVisual.astro';
+import InfrastructureVisual from './visuals/InfrastructureVisual/InfrastructureVisual.astro';
+import KubernetesVisual from './visuals/KubernetesVisual/KubernetesVisual.astro';
+import Web3Visual from './visuals/Web3Visual/Web3Visual.astro';
+
+interface Props {
+    serviceId: ServiceId;
+    imageAlt: ServiceOfferingsContent['imageAlt'];
+    complianceVisualLabel: string;
+    complianceBadges: ServiceOfferingsContent['complianceBadges'];
+    alternate?: boolean;
+}
+
+const {
+    serviceId,
+    imageAlt,
+    complianceVisualLabel,
+    complianceBadges,
+    alternate = false,
+} = Astro.props;
+---
+
+{serviceId === ServiceId.Infrastructure && (
+    <InfrastructureVisual alt={imageAlt[0]} {alternate} />
+)}
+{serviceId === ServiceId.Kubernetes && (
+    <KubernetesVisual alt={imageAlt[1]} {alternate} />
+)}
+{serviceId === ServiceId.Web3 && <Web3Visual {alternate} />}
+{serviceId === ServiceId.Compliance && (
+    <ComplianceVisual
+        label={complianceVisualLabel}
+        badges={complianceBadges}
+        {alternate}
+    />
+)}
+{serviceId === ServiceId.AiInfrastructure && <AiVisual {alternate} />}

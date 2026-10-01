@@ -1,11 +1,14 @@
 ---
-import AnalyticsConsent from '../components/analytics/AnalyticsConsent/AnalyticsConsent.astro';
+import AnalyticsConsent from '../components/organisms/AnalyticsConsent/AnalyticsConsent.astro';
 import SeoHead from '../components/seo/SeoHead/SeoHead.astro';
 import type { SiteContent } from '../domains/site/interfaces/site-content.interface';
 import '../styles/global.css';
 
 interface Props {
-    content: SiteContent;
+    locale: SiteContent['locale'];
+    siteName: SiteContent['siteName'];
+    seo: SiteContent['seo'];
+    analytics: SiteContent['analytics'];
     pageTitle?: string;
     pageDescription?: string;
     robots?: string;
@@ -13,19 +16,24 @@ interface Props {
 }
 
 const {
-    content,
-    pageTitle = content.seo.title,
-    pageDescription = content.seo.description,
+    locale,
+    siteName,
+    seo,
+    analytics,
+    pageTitle = seo.title,
+    pageDescription = seo.description,
     robots = 'index, follow, max-image-preview:large',
     canonicalPath,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={content.locale}>
+<html lang={locale}>
     <head>
         <SeoHead
-            content={content}
+            {locale}
+            {siteName}
+            {seo}
             pageTitle={pageTitle}
             pageDescription={pageDescription}
             robots={robots}
@@ -34,6 +42,6 @@ const {
     </head>
     <body>
         <slot />
-        <AnalyticsConsent content={content.analytics} />
+        <AnalyticsConsent content={analytics} />
     </body>
 </html>

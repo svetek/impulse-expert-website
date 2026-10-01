@@ -1,0 +1,32 @@
+---
+import styles from './ServiceVisualFrame.module.css';
+
+interface Props {
+    alternate?: boolean;
+    class?: string;
+    label?: string;
+    role?: 'img';
+    decorative?: boolean;
+}
+
+const {
+    alternate = false,
+    class: className,
+    label,
+    role,
+    decorative = false,
+} = Astro.props;
+---
+
+<div
+    class:list={[
+        styles['frame'],
+        { [styles['alternate']]: alternate },
+        className,
+    ]}
+    aria-label={label}
+    aria-hidden={decorative ? 'true' : undefined}
+    {role}
+>
+    <slot />
+</div>

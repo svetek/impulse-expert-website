@@ -17,23 +17,28 @@ The analytics variables are optional. If they are omitted, no consent banner is 
 ```text
 src/
 ├── components/
-│   ├── analytics/  # Consent and analytics loaders
-│   ├── layout/     # Site header and footer
-│   ├── pages/      # Page-level composition
-│   ├── sections/   # Landing sections and their private components
-│   ├── seo/        # Metadata and structured data
-│   └── ui/         # Small reusable UI elements
+│   ├── atoms/      # Basic actions, labels and icons
+│   ├── molecules/  # Shared composed interface elements
+│   ├── organisms/  # Shared header, footer and page sections
+│   ├── templates/  # Content-independent page structure
+│   ├── pages/      # Templates filled with localized content
+│   └── seo/        # Non-visual metadata and structured data
 ├── domains/
 │   ├── localization/ # Locale configuration and independent EN/RU content
 │   └── site/         # Site-wide content contracts and technical config
 ├── features/
-│   └── service-offerings/ # Service section, models and visuals
+│   └── service-offerings/
+│       ├── enums/      # Service identifiers
+│       ├── interfaces/ # Feature content contracts
+│       └── ui/         # Feature-local atoms, molecules and organisms
 ├── layouts/        # HTML document layouts
 ├── pages/          # Astro file-based routes
 └── styles/         # Global tokens, reset and shared primitives
 ```
 
-Large components keep isolated styles in adjacent `*.module.css` files imported from their Astro frontmatter. Small components may use Astro's scoped `<style>`. `styles/global.css` contains only design tokens, reset rules, base typography, layout primitives, and shared button styles.
+The UI follows Atomic Design at two scopes: reusable UI lives in `components/`, while service-specific atoms, molecules, and organisms stay in `features/service-offerings/ui/`. Pages compose templates and organisms, and lower levels do not import page-level components. SEO and route files stay outside the visual hierarchy. Components keep isolated styles in adjacent `*.module.css` files; small components may use Astro's scoped `<style>`. `styles/global.css` contains only design tokens, reset rules, base typography, and layout primitives.
+
+Component classification and dependency rules are documented in [`docs/atomic-design.md`](docs/atomic-design.md).
 
 Each locale is defined independently in `src/domains/localization/data/en.ts` and `ru.ts`. Both objects must satisfy the same TypeScript content contract, so missing translations fail during type checking.
 

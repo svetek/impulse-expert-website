@@ -9,16 +9,19 @@ import {
 } from '../../../domains/localization/config/locale.config';
 
 interface Props {
-    content: SiteContent;
+    locale: SiteContent['locale'];
+    siteName: SiteContent['siteName'];
+    seo: SiteContent['seo'];
     pageTitle: string;
     pageDescription: string;
     robots: string;
     canonicalPath?: string | null;
 }
 
-const { content, pageTitle, pageDescription, robots } = Astro.props;
+const { locale, siteName, seo, pageTitle, pageDescription, robots } =
+    Astro.props;
 const site = Astro.site ?? new URL(siteConfig.fallbackUrl);
-const currentLocale = localeConfig[content.locale];
+const currentLocale = localeConfig[locale];
 const canonicalPath =
     Astro.props.canonicalPath === undefined
         ? currentLocale.path
@@ -38,10 +41,10 @@ const ogImage = new URL(socialImage.src, site);
 const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: content.siteName,
+    name: siteName,
     url: new URL('/', site).href,
     email: siteConfig.email,
-    description: content.seo.description,
+    description: seo.description,
 };
 ---
 
@@ -69,10 +72,10 @@ const organizationSchema = {
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content={content.siteName} />
+<meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content={currentLocale.openGraphLocale} />
 {alternateLocales
-    .filter(([locale]) => locale !== content.locale)
+    .filter(([alternateLocale]) => alternateLocale !== locale)
     .map(([, config]) => (
         <meta property="og:locale:alternate" content={config.openGraphLocale} />
     ))}
@@ -83,7 +86,7 @@ const organizationSchema = {
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={content.seo.socialImageAlt} />
+<meta property="og:image:alt" content={seo.socialImageAlt} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={pageTitle} />

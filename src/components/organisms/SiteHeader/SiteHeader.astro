@@ -1,0 +1,121 @@
+---
+import styles from './SiteHeader.module.css';
+import { localeConfig } from '../../../domains/localization/config/locale.config';
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+import type { Locale } from '../../../domains/localization/types/locale.type';
+import ActionLink from '../../atoms/Action/ActionLink.astro';
+import Brand from '../../molecules/Brand/Brand.astro';
+
+interface Props {
+    locale: Locale;
+    siteName: string;
+    content: SiteContent['header'];
+}
+
+const { locale, siteName, content } = Astro.props;
+const currentLocale = localeConfig[locale];
+const root = currentLocale.path;
+const alternateLocale = currentLocale.alternateLocale;
+const alternatePath = localeConfig[alternateLocale].path;
+---
+
+<header class:list={[styles['site-header']]} id="top" data-site-header>
+    <div class:list={['shell', styles['nav-wrap']]}>
+        <Brand href={`${root}#top`} label={content.homeLabel} name={siteName} />
+        <nav class:list={[styles['desktop-nav']]} aria-label={content.navLabel}>
+            {content.nav.map(([label, href]) => (
+                <a href={href}>{label}</a>
+            ))}
+        </nav>
+        <a
+            class:list={[styles['locale-switch']]}
+            href={alternatePath}
+            lang={alternateLocale}
+            hreflang={alternateLocale}
+            aria-label={content.switchLanguageLabel}
+        >
+            {content.switchLocale}
+        </a>
+        <ActionLink class={styles['header-cta']} size="small" href="#contact">
+            {content.talk} <span aria-hidden="true">→</span>
+        </ActionLink>
+        <button
+            class:list={[styles['menu-button']]}
+            data-menu-button
+            type="button"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label={content.openMenu}
+            data-open-label={content.openMenu}
+            data-close-label={content.closeMenu}
+        >
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+    <nav
+        class:list={[styles['mobile-nav']]}
+        data-mobile-nav
+        id="mobile-nav"
+        aria-label={content.navLabel}
+    >
+        {content.nav.map(([label, href]) => (
+            <a href={href}>{label}</a>
+        ))}
+        <a href={alternatePath} lang={alternateLocale}>
+            {content.alternateLanguageName}
+        </a>
+    </nav>
+</header>
+
+<script>
+    const menuButton =
+        document.querySelector<HTMLButtonElement>('[data-menu-button]');
+    const mobileNav = document.querySelector<HTMLElement>('[data-mobile-nav]');
+
+    const setMenuOpen = (open: boolean) => {
+        if (!menuButton || !mobileNav) return;
+        menuButton.setAttribute('aria-expanded', String(open));
+        menuButton.setAttribute(
+            'aria-label',
+            open
+                ? (menuButton.dataset.closeLabel ?? '')
+                : (menuButton.dataset.openLabel ?? ''),
+        );
+        mobileNav.classList.toggle('open', open);
+    };
+
+    menuButton?.addEventListener('click', () => {
+        const open = menuButton.getAttribute('aria-expanded') !== 'true';
+        setMenuOpen(open);
+    });
+
+    mobileNav?.addEventListener('click', (event) => {
+        if ((event.target as Element).closest('a')) {
+            setMenuOpen(false);
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (
+            event.key === 'Escape' &&
+            menuButton?.getAttribute('aria-expanded') === 'true'
+        ) {
+            setMenuOpen(false);
+            menuButton.focus();
+        }
+    });
+
+    const header = document.querySelector('[data-site-header]');
+    let scrollFrame: number | undefined;
+    const updateHeader = () => {
+        if (scrollFrame !== undefined) return;
+        scrollFrame = window.requestAnimationFrame(() => {
+            header?.classList.toggle('scrolled', window.scrollY > 24);
+            scrollFrame = undefined;
+        });
+    };
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+</script>

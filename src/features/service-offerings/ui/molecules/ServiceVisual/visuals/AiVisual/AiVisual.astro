@@ -1,0 +1,16 @@
+---
+import ServiceVisualFrame from '../../ServiceVisualFrame.astro';
+import styles from './AiVisual.module.css';
+
+interface Props {
+    alternate?: boolean;
+}
+
+const { alternate = false } = Astro.props;
+---
+
+<ServiceVisualFrame class={styles['visual']} {alternate} decorative>
+    <div class:list={[styles['chip']]}>AI</div>
+    <div class:list={[styles['orbit'], styles['orbit-a']]} />
+    <div class:list={[styles['orbit'], styles['orbit-b']]} />
+</ServiceVisualFrame>

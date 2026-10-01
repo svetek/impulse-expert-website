@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets';
+import infrastructureImage from '../../../../../../../assets/images/infra-network.png';
+import ServiceVisualFrame from '../../ServiceVisualFrame.astro';
+import styles from './InfrastructureVisual.module.css';
+
+interface Props {
+    alt: string;
+    alternate?: boolean;
+}
+
+const { alt, alternate = false } = Astro.props;
+---
+
+<ServiceVisualFrame class={styles['visual']} {alternate}>
+    <Image
+        class={styles['image']}
+        src={infrastructureImage}
+        {alt}
+        width={1280}
+        widths={[480, 720, 960, 1280]}
+        sizes="(max-width: 900px) 100vw, 50vw"
+        quality="high"
+        loading="lazy"
+    />
+</ServiceVisualFrame>

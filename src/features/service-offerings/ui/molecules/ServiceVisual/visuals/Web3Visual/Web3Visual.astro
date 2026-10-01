@@ -1,0 +1,21 @@
+---
+import ServiceVisualFrame from '../../ServiceVisualFrame.astro';
+import styles from './Web3Visual.module.css';
+
+interface Props {
+    alternate?: boolean;
+}
+
+const { alternate = false } = Astro.props;
+---
+
+<ServiceVisualFrame class={styles['visual']} {alternate} decorative>
+    <div class:list={[styles['network-lines']]} />
+    <div class:list={[styles['node'], styles['n1']]} />
+    <div class:list={[styles['node'], styles['n2']]} />
+    <div class:list={[styles['node'], styles['n3']]} />
+    <div class:list={[styles['node'], styles['n4']]} />
+    <div class:list={[styles['node-core']]}>
+        <span>◈</span>
+    </div>
+</ServiceVisualFrame>

@@ -1,0 +1,47 @@
+.action {
+    display: inline-flex;
+    min-height: 48px;
+    padding: 0 23px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-blue));
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    color: white;
+    font-size: 0.87rem;
+    font-weight: 750;
+    box-shadow: 0 8px 30px rgba(0, 131, 255, 0.22);
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 38px rgba(0, 160, 255, 0.36);
+}
+
+.ghost {
+    background: rgba(2, 8, 18, 0.62);
+    border-color: rgba(144, 181, 218, 0.32);
+    box-shadow: none;
+    color: #dceaff;
+}
+
+.small {
+    min-height: 43px;
+    padding-inline: 20px;
+    font-size: 0.78rem;
+}
+
+.large {
+    min-width: 230px;
+    min-height: 55px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .action {
+        transition: none;
+    }
+}

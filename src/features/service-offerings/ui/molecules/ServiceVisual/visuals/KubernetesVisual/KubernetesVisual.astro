@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import infrastructureImage from '../../../../../../../assets/images/infra-network.png';
+import ServiceVisualFrame from '../../ServiceVisualFrame.astro';
+import styles from './KubernetesVisual.module.css';
+
+interface Props {
+    alt: string;
+    alternate?: boolean;
+}
+
+const { alt, alternate = false } = Astro.props;
+---
+
+<ServiceVisualFrame class={styles['visual']} {alternate}>
+    <Image
+        class={styles['image']}
+        src={infrastructureImage}
+        {alt}
+        width={1280}
+        widths={[480, 720, 960, 1280]}
+        sizes="(max-width: 900px) 100vw, 50vw"
+        quality="high"
+        loading="lazy"
+    />
+    <svg class:list={[styles['mark']]} viewBox="0 0 100 100" aria-hidden="true">
+        <polygon points="50,3 91,27 91,73 50,97 9,73 9,27" />
+        <circle cx="50" cy="50" r="21" />
+        <path d="M50 22v56M22 50h56M31 31l38 38M69 31 31 69" />
+    </svg>
+</ServiceVisualFrame>

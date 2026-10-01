@@ -1,0 +1,60 @@
+---
+import styles from './ServiceIcon.module.css';
+import { ServiceId } from '../../../enums/service-id.enum';
+
+interface Props {
+    serviceId: ServiceId;
+}
+
+const { serviceId } = Astro.props;
+---
+
+{serviceId === ServiceId.Infrastructure && (
+    <svg
+        class:list={[styles['direction-icon']]}
+        viewBox="0 0 48 48"
+        aria-hidden="true"
+    >
+        <path d="M14 36h23a8 8 0 0 0 1-15.9A13 13 0 0 0 13.5 17 9.5 9.5 0 0 0 14 36Z" />
+    </svg>
+)}
+{serviceId === ServiceId.Kubernetes && (
+    <svg
+        class:list={[styles['direction-icon']]}
+        viewBox="0 0 48 48"
+        aria-hidden="true"
+    >
+        <path d="m24 4 13 7.5v15L24 34l-13-7.5v-15Z" />
+        <path d="m11 11.5 13 7.4 13-7.4M24 19v15" />
+    </svg>
+)}
+{serviceId === ServiceId.Web3 && (
+    <svg
+        class:list={[styles['direction-icon']]}
+        viewBox="0 0 48 48"
+        aria-hidden="true"
+    >
+        <path d="M24 19a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm-12 21a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm24 0a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" />
+        <path d="m20 17-5 12m13-12 5 12m-15 5h12" />
+    </svg>
+)}
+{serviceId === ServiceId.Compliance && (
+    <svg
+        class:list={[styles['direction-icon']]}
+        viewBox="0 0 48 48"
+        aria-hidden="true"
+    >
+        <path d="M24 4 39 10v11c0 10-6 17-15 23C15 38 9 31 9 21V10Z" />
+        <path d="m18 23 4 4 8-9" />
+    </svg>
+)}
+{serviceId === ServiceId.AiInfrastructure && (
+    <svg
+        class:list={[styles['direction-icon']]}
+        viewBox="0 0 48 48"
+        aria-hidden="true"
+    >
+        <path d="M19 8a7 7 0 0 0-6 10 7 7 0 0 0 0 12 7 7 0 0 0 10 7V11a4 4 0 0 0-4-3Zm10 0a7 7 0 0 1 6 10 7 7 0 0 1 0 12 7 7 0 0 1-10 7V11a4 4 0 0 1 4-3Z" />
+        <path d="M17 18h6m-8 9h8m8-9h-6m8 9h-8" />
+    </svg>
+)}

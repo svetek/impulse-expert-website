@@ -1,0 +1,85 @@
+.visual {
+    background: radial-gradient(
+        circle at 52% 48%,
+        rgba(0, 117, 255, 0.25),
+        transparent 38%
+    );
+}
+
+.network-lines {
+    position: absolute;
+    inset: 14%;
+    transform: perspective(480px) rotateX(58deg) rotateZ(-10deg);
+    border: 1px solid rgba(33, 200, 255, 0.1);
+    background-image:
+        linear-gradient(rgba(29, 170, 255, 0.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(29, 170, 255, 0.14) 1px, transparent 1px);
+    background-size: 42px 42px;
+}
+
+.node {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    transform: rotate(30deg) skew(-5deg);
+    border: 1px solid #168cff;
+    background: linear-gradient(
+        145deg,
+        rgba(28, 188, 255, 0.45),
+        rgba(2, 26, 70, 0.8)
+    );
+    box-shadow:
+        0 0 24px rgba(0, 131, 255, 0.4),
+        inset 0 0 20px rgba(0, 154, 255, 0.22);
+}
+
+.node::after {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.23);
+}
+
+.n1 {
+    top: 52%;
+    left: 17%;
+}
+
+.n2 {
+    top: 25%;
+    left: 42%;
+    width: 76px;
+    height: 76px;
+}
+
+.n3 {
+    top: 42%;
+    right: 15%;
+}
+
+.n4 {
+    bottom: 13%;
+    left: 55%;
+    width: 48px;
+    height: 48px;
+}
+
+.node-core {
+    position: absolute;
+    top: 43%;
+    left: 45%;
+    width: 92px;
+    height: 92px;
+    display: grid;
+    place-items: center;
+    transform: rotate(45deg);
+    border: 1px solid var(--color-cyan);
+    background: #03214a;
+    box-shadow: 0 0 55px #006dff;
+}
+
+.node-core span {
+    transform: rotate(-45deg);
+    color: var(--color-cyan);
+    font-size: 2.8rem;
+}
