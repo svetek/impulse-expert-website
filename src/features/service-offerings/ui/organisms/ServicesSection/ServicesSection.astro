@@ -1,15 +1,17 @@
 ---
 import styles from './ServicesSection.module.css';
 import type { ServiceOfferingsContent } from '../../../interfaces/service-content.interface';
+import type { Locale } from '../../../../../domains/localization/types/locale.type';
 import ExpertiseGrid from '../ExpertiseGrid/ExpertiseGrid.astro';
 import ServiceItem from '../ServiceItem/ServiceItem.astro';
 import Eyebrow from '../../../../../components/atoms/Eyebrow/Eyebrow.astro';
 
 interface Props {
     content: ServiceOfferingsContent;
+    locale: Locale;
 }
 
-const { content } = Astro.props;
+const { content, locale } = Astro.props;
 ---
 
 <section
@@ -29,6 +31,7 @@ const { content } = Astro.props;
         {content.items.map((service, index) => (
             <ServiceItem
                 service={service}
+                {locale}
                 imageAlt={content.imageAlt}
                 complianceVisualLabel={content.complianceVisualLabel}
                 complianceBadges={content.complianceBadges}

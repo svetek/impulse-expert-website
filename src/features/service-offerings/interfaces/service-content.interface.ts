@@ -7,6 +7,12 @@ export interface ServiceContent {
     title: string;
     text: string;
     items: string[];
+    scenario: {
+        title: string;
+        challenge: string;
+        approach: string;
+        checks: string[];
+    };
 }
 
 export interface ServiceOfferingsContent {
@@ -23,5 +29,25 @@ export interface ServiceOfferingsContent {
         aligned: string;
         ready: string;
         controls: string;
+    };
+    page: {
+        breadcrumbHome: string;
+        breadcrumbServices: string;
+        capabilitiesTitle: string;
+        approachTitle: string;
+        approachText: string;
+        otherServicesTitle: string;
+        discussProject: string;
+        scenarioEyebrow: string;
+        scenarioDisclaimer: string;
+        challengeLabel: string;
+        solutionLabel: string;
+        verificationLabel: string;
+        measurementTitle: string;
+        measurementIntro: string;
+        measurementItems: Array<{
+            title: string;
+            description: string;
+        }>;
     };
 }

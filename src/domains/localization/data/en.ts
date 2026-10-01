@@ -56,6 +56,19 @@ export const en = {
                     'Load balancing & auto-scaling',
                     'Disaster recovery and backup',
                 ],
+                scenario: {
+                    title: 'Multi-region cloud platform launch',
+                    challenge:
+                        'A growing product team needs to remove a single-region dependency and make infrastructure changes repeatable without increasing operational complexity.',
+                    approach:
+                        'Define availability and recovery requirements, separate critical workloads, automate infrastructure delivery and introduce centralized monitoring and backup policies.',
+                    checks: [
+                        'Regional failover exercise',
+                        'Backup restoration test',
+                        'Load and capacity test',
+                        'Infrastructure drift review',
+                    ],
+                },
             },
             {
                 id: ServiceId.Kubernetes,
@@ -69,6 +82,19 @@ export const en = {
                     'CI/CD integration',
                     'Monitoring, scaling & hardening',
                 ],
+                scenario: {
+                    title: 'Migration to a production Kubernetes platform',
+                    challenge:
+                        'A team has containerized applications but lacks predictable deployments, controlled rollbacks and a consistent operating model.',
+                    approach:
+                        'Design cluster boundaries, automate delivery, define resource and security policies, and add workload-level observability before migration.',
+                    checks: [
+                        'Deployment and rollback test',
+                        'Worker-node failure simulation',
+                        'Autoscaling verification',
+                        'Access and network policy review',
+                    ],
+                },
             },
             {
                 id: ServiceId.Web3,
@@ -82,6 +108,19 @@ export const en = {
                     'High-uptime architecture',
                     'Monitoring, alerting & auto-recovery',
                 ],
+                scenario: {
+                    title: 'Resilient RPC and validator infrastructure',
+                    challenge:
+                        'A protocol team needs stable node access, early detection of synchronization problems and a controlled recovery path after host failure.',
+                    approach:
+                        'Separate validator and RPC roles, automate node provisioning, monitor chain-specific health signals and document failover procedures.',
+                    checks: [
+                        'Node synchronization monitoring',
+                        'RPC latency and error-rate test',
+                        'Host failure recovery exercise',
+                        'Key-access procedure review',
+                    ],
+                },
             },
             {
                 id: ServiceId.Compliance,
@@ -95,6 +134,19 @@ export const en = {
                     'Data protection and encryption',
                     'Access management & audit logging',
                 ],
+                scenario: {
+                    title: 'Infrastructure preparation for an audit',
+                    challenge:
+                        'A company needs technical controls, traceable access and operational evidence before an independent compliance assessment.',
+                    approach:
+                        'Map applicable controls to infrastructure, close logging and access-management gaps, automate evidence collection and document operating procedures.',
+                    checks: [
+                        'Privileged-access review',
+                        'Audit-log coverage check',
+                        'Encryption configuration review',
+                        'Backup restoration evidence',
+                    ],
+                },
             },
             {
                 id: ServiceId.AiInfrastructure,
@@ -108,6 +160,19 @@ export const en = {
                     'Model deployment at scale',
                     'Secure, cost-optimized setup',
                 ],
+                scenario: {
+                    title: 'Moving an AI model from prototype to inference',
+                    challenge:
+                        'A team needs repeatable model deployment, predictable inference performance and visibility into GPU utilization and operating cost.',
+                    approach:
+                        'Profile the workload, select the serving architecture, automate model releases and establish performance, capacity and cost monitoring.',
+                    checks: [
+                        'Inference latency benchmark',
+                        'Throughput and concurrency test',
+                        'GPU utilization review',
+                        'Release and rollback test',
+                    ],
+                },
             },
         ],
         imageAlt: [
@@ -120,11 +185,54 @@ export const en = {
             ready: 'READY',
             controls: 'CONTROLS',
         },
+        page: {
+            breadcrumbHome: 'Home',
+            breadcrumbServices: 'Services',
+            capabilitiesTitle: 'What we deliver',
+            approachTitle: 'How we approach the work',
+            approachText:
+                'We start with workload, security and availability requirements, then design the architecture, automate delivery and establish observable day-to-day operations.',
+            otherServicesTitle: 'Related infrastructure services',
+            discussProject: 'Discuss your project',
+            scenarioEyebrow: 'Illustrative delivery scenario',
+            scenarioDisclaimer:
+                'This is a representative project pattern, not a claim about a specific client or completed engagement.',
+            challengeLabel: 'Typical challenge',
+            solutionLabel: 'Delivery approach',
+            verificationLabel: 'Acceptance checks',
+            measurementTitle: 'How outcomes are verified',
+            measurementIntro:
+                'Targets are agreed before implementation and supported by reproducible measurements rather than marketing estimates.',
+            measurementItems: [
+                {
+                    title: 'Availability',
+                    description:
+                        'Measured by agreed external probes over a defined reporting window, with maintenance and exclusions documented.',
+                },
+                {
+                    title: 'Incident response',
+                    description:
+                        'Calculated from monitoring or ticket timestamps between detection and acknowledgement.',
+                },
+                {
+                    title: 'Recovery',
+                    description:
+                        'RTO and RPO are checked through scheduled restore and failover exercises.',
+                },
+                {
+                    title: 'Performance',
+                    description:
+                        'Latency, throughput and resource utilization are recorded under an agreed representative workload.',
+                },
+            ],
+        },
     },
     proof: {
         eyebrow: 'Built for ambitious teams',
         title: 'Trusted where uptime matters.',
         metricsLabel: 'Company metrics',
+        metricsNote:
+            'Coverage and target values depend on the agreed service scope. Measurement rules and reporting windows are documented for each project.',
         metrics: [
             ['99.99%', 'target uptime'],
             ['24/7', 'expert monitoring'],

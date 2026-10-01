@@ -28,9 +28,10 @@ src/
 │   └── site/         # Site-wide content contracts and technical config
 ├── features/
 │   └── service-offerings/
+│       ├── config/     # Stable service slugs and localized route helpers
 │       ├── enums/      # Service identifiers
 │       ├── interfaces/ # Feature content contracts
-│       └── ui/         # Feature-local atoms, molecules and organisms
+│       └── ui/         # Feature-local Atomic Design hierarchy
 ├── layouts/        # HTML document layouts
 ├── pages/          # Astro file-based routes
 └── styles/         # Global tokens, reset and shared primitives
@@ -73,5 +74,9 @@ Cloudflare reads `public/_headers` from the generated assets. Security headers a
 
 - `/robots.txt`
 - `/sitemap.xml`
+- `/llms.txt` (experimental machine-readable service index)
 - `/` with `hreflang="en"`
 - `/ru/` with `hreflang="ru"`
+- `/services/:service/` and `/ru/services/:service/`
+
+Service pages emit canonical and reciprocal language links plus `WebPage`, `Service`, and `BreadcrumbList` JSON-LD. Global metadata includes `Organization` and `WebSite` entities. Register the production sitemap in Google Search Console, Bing Webmaster Tools, and Yandex Webmaster after deployment. Also verify that Cloudflare bot protection returns HTTP `200` to `OAI-SearchBot`; `robots.txt` explicitly permits it.

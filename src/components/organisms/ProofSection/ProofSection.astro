@@ -24,6 +24,7 @@ const { content } = Astro.props;
                 </div>
             ))}
         </div>
+        <p class:list={[styles['metrics-note']]}>{content.metricsNote}</p>
         <div class:list={[styles['quotes']]}>
             {content.quotes.map(([quote, name, role, initials]) => (
                 <figure>

@@ -2,6 +2,7 @@
 import AnalyticsConsent from '../components/organisms/AnalyticsConsent/AnalyticsConsent.astro';
 import SeoHead from '../components/seo/SeoHead/SeoHead.astro';
 import type { SiteContent } from '../domains/site/interfaces/site-content.interface';
+import type { Locale } from '../domains/localization/types/locale.type';
 import '../styles/global.css';
 
 interface Props {
@@ -13,6 +14,8 @@ interface Props {
     pageDescription?: string;
     robots?: string;
     canonicalPath?: string | null;
+    alternatePaths?: Partial<Record<Locale, string>>;
+    structuredData?: Array<Record<string, unknown>>;
 }
 
 const {
@@ -24,6 +27,8 @@ const {
     pageDescription = seo.description,
     robots = 'index, follow, max-image-preview:large',
     canonicalPath,
+    alternatePaths,
+    structuredData = [],
 } = Astro.props;
 ---
 
@@ -38,6 +43,8 @@ const {
             pageDescription={pageDescription}
             robots={robots}
             canonicalPath={canonicalPath}
+            alternatePaths={alternatePaths}
+            structuredData={structuredData}
         />
     </head>
     <body>

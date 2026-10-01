@@ -4,25 +4,48 @@ import {
     localeConfig,
 } from '../domains/localization/config/locale.config';
 import { siteConfig } from '../domains/site/config/site.config';
+import {
+    getServicePath,
+    serviceIds,
+} from '../features/service-offerings/config/service-route.config';
 
 export const GET: APIRoute = ({ site }) => {
     const base = site ?? new URL(siteConfig.fallbackUrl);
-    const urls = Object.values(localeConfig).map(({ path }) => path);
-    const alternates = Object.entries(localeConfig);
+    const pageGroups = [
+        Object.fromEntries(
+            Object.entries(localeConfig).map(([locale, config]) => [
+                locale,
+                config.path,
+            ]),
+        ),
+        ...serviceIds.map((serviceId) =>
+            Object.fromEntries(
+                Object.keys(localeConfig).map((locale) => [
+                    locale,
+                    getServicePath(
+                        locale as keyof typeof localeConfig,
+                        serviceId,
+                    ),
+                ]),
+            ),
+        ),
+    ];
     const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${urls
-    .map(
-        (path) => `  <url>
+${pageGroups
+    .flatMap((paths) =>
+        Object.entries(paths).map(
+            ([, path]) => `  <url>
     <loc>${new URL(path, base).href}</loc>
-${alternates
+${Object.entries(paths)
     .map(
-        ([locale, config]) =>
-            `    <xhtml:link rel="alternate" hreflang="${locale}" href="${new URL(config.path, base).href}" />`,
+        ([locale, alternatePath]) =>
+            `    <xhtml:link rel="alternate" hreflang="${locale}" href="${new URL(alternatePath, base).href}" />`,
     )
     .join('\n')}
-    <xhtml:link rel="alternate" hreflang="x-default" href="${new URL(localeConfig[defaultLocale].path, base).href}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${new URL(paths[defaultLocale], base).href}" />
   </url>`,
+        ),
     )
     .join('\n')}
 </urlset>`;

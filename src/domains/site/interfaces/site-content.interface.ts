@@ -34,6 +34,7 @@ export interface SiteContent {
         eyebrow: string;
         title: string;
         metricsLabel: string;
+        metricsNote: string;
         metrics: Array<[value: string, label: string]>;
         quotes: Array<
             [quote: string, name: string, role: string, initials: string]

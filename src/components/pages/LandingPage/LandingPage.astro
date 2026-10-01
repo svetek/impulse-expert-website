@@ -31,7 +31,7 @@ const { content } = Astro.props;
         content={content.header}
     />
     <HeroSection content={content.hero} />
-    <ServicesSection content={content.services} />
+    <ServicesSection content={content.services} locale={content.locale} />
     <ProofSection content={content.proof} />
     <ContactSection content={content.contact} />
     <SiteFooter

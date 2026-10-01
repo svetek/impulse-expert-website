@@ -5,9 +5,12 @@ import type {
     ServiceOfferingsContent,
 } from '../../../interfaces/service-content.interface';
 import ServiceVisual from '../../molecules/ServiceVisual/ServiceVisual.astro';
+import { getServicePath } from '../../../config/service-route.config';
+import type { Locale } from '../../../../../domains/localization/types/locale.type';
 
 interface Props {
     service: ServiceContent;
+    locale: Locale;
     imageAlt: ServiceOfferingsContent['imageAlt'];
     complianceVisualLabel: string;
     complianceBadges: ServiceOfferingsContent['complianceBadges'];
@@ -17,6 +20,7 @@ interface Props {
 
 const {
     service,
+    locale,
     imageAlt,
     complianceVisualLabel,
     complianceBadges,
@@ -44,7 +48,10 @@ const {
                 <li>{item}</li>
             ))}
         </ul>
-        <a class:list={[styles['text-link']]} href="#contact">
+        <a
+            class:list={[styles['text-link']]}
+            href={getServicePath(locale, service.id)}
+        >
             {learnMore} <span aria-hidden="true">→</span>
         </a>
     </div>

@@ -1,0 +1,60 @@
+---
+import Eyebrow from '../../../../../components/atoms/Eyebrow/Eyebrow.astro';
+import type {
+    ServiceContent,
+    ServiceOfferingsContent,
+} from '../../../interfaces/service-content.interface';
+import styles from './ServiceEvidence.module.css';
+
+interface Props {
+    service: ServiceContent;
+    content: ServiceOfferingsContent['page'];
+}
+
+const { service, content } = Astro.props;
+---
+
+<section
+    class:list={['shell', styles['evidence']]}
+    aria-labelledby="scenario-title"
+>
+    <header class:list={[styles['heading']]}>
+        <Eyebrow tone="accent">{content.scenarioEyebrow}</Eyebrow>
+        <h2 id="scenario-title">{service.scenario.title}</h2>
+        <p>{content.scenarioDisclaimer}</p>
+    </header>
+
+    <div class:list={[styles['scenario-grid']]}>
+        <article>
+            <h3>{content.challengeLabel}</h3>
+            <p>{service.scenario.challenge}</p>
+        </article>
+        <article>
+            <h3>{content.solutionLabel}</h3>
+            <p>{service.scenario.approach}</p>
+        </article>
+        <article>
+            <h3>{content.verificationLabel}</h3>
+            <ul>
+                {service.scenario.checks.map((check) => (
+                    <li>{check}</li>
+                ))}
+            </ul>
+        </article>
+    </div>
+
+    <div class:list={[styles['measurement']]}>
+        <div class:list={[styles['measurement-heading']]}>
+            <h2>{content.measurementTitle}</h2>
+            <p>{content.measurementIntro}</p>
+        </div>
+        <dl>
+            {content.measurementItems.map((item) => (
+                <div>
+                    <dt>{item.title}</dt>
+                    <dd>{item.description}</dd>
+                </div>
+            ))}
+        </dl>
+    </div>
+</section>

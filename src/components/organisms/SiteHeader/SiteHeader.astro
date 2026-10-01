@@ -10,13 +10,22 @@ interface Props {
     locale: Locale;
     siteName: string;
     content: SiteContent['header'];
+    navigationBase?: string;
+    alternateHref?: string;
 }
 
-const { locale, siteName, content } = Astro.props;
+const {
+    locale,
+    siteName,
+    content,
+    navigationBase = '',
+    alternateHref,
+} = Astro.props;
 const currentLocale = localeConfig[locale];
 const root = currentLocale.path;
 const alternateLocale = currentLocale.alternateLocale;
-const alternatePath = localeConfig[alternateLocale].path;
+const alternatePath = alternateHref ?? localeConfig[alternateLocale].path;
+const getNavigationHref = (href: string) => `${navigationBase}${href}`;
 ---
 
 <header class:list={[styles['site-header']]} id="top" data-site-header>
@@ -24,7 +33,7 @@ const alternatePath = localeConfig[alternateLocale].path;
         <Brand href={`${root}#top`} label={content.homeLabel} name={siteName} />
         <nav class:list={[styles['desktop-nav']]} aria-label={content.navLabel}>
             {content.nav.map(([label, href]) => (
-                <a href={href}>{label}</a>
+                <a href={getNavigationHref(href)}>{label}</a>
             ))}
         </nav>
         <a
@@ -36,7 +45,11 @@ const alternatePath = localeConfig[alternateLocale].path;
         >
             {content.switchLocale}
         </a>
-        <ActionLink class={styles['header-cta']} size="small" href="#contact">
+        <ActionLink
+            class={styles['header-cta']}
+            size="small"
+            href={getNavigationHref('#contact')}
+        >
             {content.talk} <span aria-hidden="true">→</span>
         </ActionLink>
         <button
@@ -60,7 +73,7 @@ const alternatePath = localeConfig[alternateLocale].path;
         aria-label={content.navLabel}
     >
         {content.nav.map(([label, href]) => (
-            <a href={href}>{label}</a>
+            <a href={getNavigationHref(href)}>{label}</a>
         ))}
         <a href={alternatePath} lang={alternateLocale}>
             {content.alternateLanguageName}

@@ -1,0 +1,200 @@
+---
+import type { SiteContent } from '../../../../../domains/site/interfaces/site-content.interface';
+import { siteConfig } from '../../../../../domains/site/config/site.config';
+import { localeConfig } from '../../../../../domains/localization/config/locale.config';
+import { supportedLocales } from '../../../../../domains/localization/types/locale.type';
+import BaseLayout from '../../../../../layouts/BaseLayout.astro';
+import ActionLink from '../../../../../components/atoms/Action/ActionLink.astro';
+import Eyebrow from '../../../../../components/atoms/Eyebrow/Eyebrow.astro';
+import ContactSection from '../../../../../components/organisms/ContactSection/ContactSection.astro';
+import SiteFooter from '../../../../../components/organisms/SiteFooter/SiteFooter.astro';
+import SiteHeader from '../../../../../components/organisms/SiteHeader/SiteHeader.astro';
+import type { ServiceId } from '../../../enums/service-id.enum';
+import { getServicePath } from '../../../config/service-route.config';
+import ServiceVisual from '../../molecules/ServiceVisual/ServiceVisual.astro';
+import ServiceEvidence from '../../organisms/ServiceEvidence/ServiceEvidence.astro';
+import styles from './ServicePage.module.css';
+
+interface Props {
+    content: SiteContent;
+    serviceId: ServiceId;
+}
+
+const { content, serviceId } = Astro.props;
+const service = content.services.items.find(({ id }) => id === serviceId);
+
+if (!service) {
+    throw new Error(`Missing localized content for service: ${serviceId}`);
+}
+
+const locale = content.locale;
+const root = localeConfig[locale].path;
+const currentPath = getServicePath(locale, serviceId);
+const alternatePaths = Object.fromEntries(
+    supportedLocales.map((supportedLocale) => [
+        supportedLocale,
+        getServicePath(supportedLocale, serviceId),
+    ]),
+);
+const alternateLocale = localeConfig[locale].alternateLocale;
+const site = Astro.site ?? new URL(siteConfig.fallbackUrl);
+const pageUrl = new URL(currentPath, site).href;
+const organizationId = new URL('/#organization', site).href;
+const websiteId = new URL('/#website', site).href;
+const pageTitle = `${service.title} — ${content.siteName}`;
+const relatedServices = content.services.items.filter(
+    ({ id }) => id !== serviceId,
+);
+const structuredData = [
+    {
+        '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: pageTitle,
+        description: service.text,
+        inLanguage: locale,
+        isPartOf: { '@id': websiteId },
+        about: { '@id': `${pageUrl}#service` },
+    },
+    {
+        '@type': 'Service',
+        '@id': `${pageUrl}#service`,
+        name: service.title,
+        serviceType: service.short,
+        description: service.text,
+        url: pageUrl,
+        provider: { '@id': organizationId },
+    },
+    {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            {
+                '@type': 'ListItem',
+                position: 1,
+                name: content.services.page.breadcrumbHome,
+                item: new URL(root, site).href,
+            },
+            {
+                '@type': 'ListItem',
+                position: 2,
+                name: content.services.page.breadcrumbServices,
+                item: new URL(`${root}#services`, site).href,
+            },
+            {
+                '@type': 'ListItem',
+                position: 3,
+                name: service.title,
+                item: pageUrl,
+            },
+        ],
+    },
+];
+---
+
+<BaseLayout
+    locale={content.locale}
+    siteName={content.siteName}
+    seo={content.seo}
+    analytics={content.analytics}
+    {pageTitle}
+    pageDescription={service.text}
+    canonicalPath={currentPath}
+    alternatePaths={alternatePaths}
+    {structuredData}
+>
+    <a class:list={[styles['skip-link']]} href="#main">
+        {content.accessibility.skipToContent}
+    </a>
+    <SiteHeader
+        locale={content.locale}
+        siteName={content.siteName}
+        content={content.header}
+        navigationBase={root}
+        alternateHref={getServicePath(alternateLocale, serviceId)}
+    />
+    <main id="main">
+        <article>
+            <div class:list={['shell', styles['breadcrumbs-wrap']]}>
+                <nav
+                    class:list={[styles['breadcrumbs']]}
+                    aria-label={content.services.page.breadcrumbServices}
+                >
+                    <a href={root}>{content.services.page.breadcrumbHome}</a>
+                    <span aria-hidden="true">/</span>
+                    <a href={`${root}#services`}>
+                        {content.services.page.breadcrumbServices}
+                    </a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">{service.title}</span>
+                </nav>
+            </div>
+
+            <header class:list={['shell', styles['hero']]}>
+                <div class:list={[styles['hero-copy']]}>
+                    <Eyebrow tone="accent">{service.kicker}</Eyebrow>
+                    <h1>{service.title}</h1>
+                    <p>{service.text}</p>
+                    <ActionLink href="#contact">
+                        {content.services.page.discussProject}
+                        <span aria-hidden="true">→</span>
+                    </ActionLink>
+                </div>
+                <ServiceVisual
+                    serviceId={service.id}
+                    imageAlt={content.services.imageAlt}
+                    complianceVisualLabel={
+                        content.services.complianceVisualLabel
+                    }
+                    complianceBadges={content.services.complianceBadges}
+                />
+            </header>
+
+            <section class:list={['shell', styles['details']]}>
+                <div>
+                    <h2>{content.services.page.capabilitiesTitle}</h2>
+                    <ul>
+                        {service.items.map((item) => (
+                            <li>{item}</li>
+                        ))}
+                    </ul>
+                </div>
+                <div>
+                    <h2>{content.services.page.approachTitle}</h2>
+                    <p>{content.services.page.approachText}</p>
+                </div>
+            </section>
+
+            <ServiceEvidence
+                service={service}
+                content={content.services.page}
+            />
+
+            <section
+                class:list={['shell', styles['related']]}
+                aria-labelledby="related-services-title"
+            >
+                <h2 id="related-services-title">
+                    {content.services.page.otherServicesTitle}
+                </h2>
+                <div class:list={[styles['related-grid']]}>
+                    {relatedServices.map((relatedService) => (
+                        <a href={getServicePath(locale, relatedService.id)}>
+                            <span>{relatedService.kicker}</span>
+                            <strong>{relatedService.title}</strong>
+                            <small aria-hidden="true">→</small>
+                        </a>
+                    ))}
+                </div>
+            </section>
+        </article>
+        <ContactSection
+            content={content.contact}
+            exploreHref={`${root}#services`}
+        />
+    </main>
+    <SiteFooter
+        locale={content.locale}
+        siteName={content.siteName}
+        content={content.footer}
+    />
+</BaseLayout>

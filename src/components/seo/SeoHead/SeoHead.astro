@@ -3,6 +3,7 @@ import { getImage } from 'astro:assets';
 import socialImageSource from '../../../assets/images/hero-datacenter.png';
 import { siteConfig } from '../../../domains/site/config/site.config';
 import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+import type { Locale } from '../../../domains/localization/types/locale.type';
 import {
     defaultLocale,
     localeConfig,
@@ -16,10 +17,20 @@ interface Props {
     pageDescription: string;
     robots: string;
     canonicalPath?: string | null;
+    alternatePaths?: Partial<Record<Locale, string>>;
+    structuredData?: Array<Record<string, unknown>>;
 }
 
-const { locale, siteName, seo, pageTitle, pageDescription, robots } =
-    Astro.props;
+const {
+    locale,
+    siteName,
+    seo,
+    pageTitle,
+    pageDescription,
+    robots,
+    alternatePaths,
+    structuredData = [],
+} = Astro.props;
 const site = Astro.site ?? new URL(siteConfig.fallbackUrl);
 const currentLocale = localeConfig[locale];
 const canonicalPath =
@@ -27,7 +38,15 @@ const canonicalPath =
         ? currentLocale.path
         : Astro.props.canonicalPath;
 const canonical = canonicalPath ? new URL(canonicalPath, site) : null;
-const alternateLocales = Object.entries(localeConfig);
+const alternateLocales = Object.entries(localeConfig).map(
+    ([alternateLocale, config]) => [
+        alternateLocale,
+        {
+            ...config,
+            path: alternatePaths?.[alternateLocale as Locale] ?? config.path,
+        },
+    ],
+) as Array<[Locale, (typeof localeConfig)[Locale]]>;
 const socialImage = await getImage({
     src: socialImageSource,
     width: 1200,
@@ -39,12 +58,26 @@ const socialImage = await getImage({
 });
 const ogImage = new URL(socialImage.src, site);
 const organizationSchema = {
-    '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': new URL('/#organization', site).href,
     name: siteName,
     url: new URL('/', site).href,
     email: siteConfig.email,
     description: seo.description,
+};
+const websiteSchema = {
+    '@type': 'WebSite',
+    '@id': new URL('/#website', site).href,
+    url: new URL('/', site).href,
+    name: siteName,
+    publisher: {
+        '@id': organizationSchema['@id'],
+    },
+    inLanguage: Object.keys(localeConfig),
+};
+const schemaGraph = {
+    '@context': 'https://schema.org',
+    '@graph': [organizationSchema, websiteSchema, ...structuredData],
 };
 ---
 
@@ -66,7 +99,13 @@ const organizationSchema = {
     <link
         rel="alternate"
         hreflang="x-default"
-        href={new URL(localeConfig[defaultLocale].path, site)}
+        href={
+            new URL(
+                alternatePaths?.[defaultLocale] ??
+                    localeConfig[defaultLocale].path,
+                site,
+            )
+        }
     />
 )}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -94,7 +133,4 @@ const organizationSchema = {
 <meta name="twitter:image" content={ogImage} />
 
 <title>{pageTitle}</title>
-<script
-    type="application/ld+json"
-    set:html={JSON.stringify(organizationSchema)}
-/>
+<script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />

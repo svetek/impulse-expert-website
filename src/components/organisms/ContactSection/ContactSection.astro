@@ -7,9 +7,10 @@ import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
 
 interface Props {
     content: SiteContent['contact'];
+    exploreHref?: string;
 }
 
-const { content } = Astro.props;
+const { content, exploreHref = '#services' } = Astro.props;
 ---
 
 <section class:list={[styles['cta']]} id="contact" aria-labelledby="cta-title">
@@ -24,7 +25,7 @@ const { content } = Astro.props;
             <ActionLink size="large" href={`mailto:${siteConfig.email}`}>
                 {content.talk} <span aria-hidden="true">→</span>
             </ActionLink>
-            <a class:list={[styles['quiet-link']]} href="#services">
+            <a class:list={[styles['quiet-link']]} href={exploreHref}>
                 {content.explore}
             </a>
         </div>
