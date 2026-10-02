@@ -80,3 +80,5 @@ Cloudflare reads `public/_headers` from the generated assets. Security headers a
 - `/services/:service/` and `/ru/services/:service/`
 
 Service pages emit canonical and reciprocal language links plus `WebPage`, `Service`, and `BreadcrumbList` JSON-LD. Global metadata includes `Organization` and `WebSite` entities. Register the production sitemap in Google Search Console, Bing Webmaster Tools, and Yandex Webmaster after deployment. Also verify that Cloudflare bot protection returns HTTP `200` to `OAI-SearchBot`; `robots.txt` explicitly permits it.
+
+
