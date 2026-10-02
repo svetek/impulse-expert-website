@@ -7,6 +7,8 @@
     --color-muted: #9cb0c7;
     --color-cyan: #21c8ff;
     --color-blue: #087dff;
+    --font-heading: 'Exo 2 Variable', ui-sans-serif, system-ui, sans-serif;
+    --heading-letter-spacing: 0.025em;
     --content-width: min(1180px, calc(100% - 48px));
     --radius-sm: 5px;
     --radius-md: 8px;
@@ -49,7 +51,12 @@ button {
 
 h1,
 h2,
-h3,
+h3 {
+    margin-top: 0;
+    font-family: var(--font-heading);
+    letter-spacing: var(--heading-letter-spacing);
+}
+
 p {
     margin-top: 0;
 }

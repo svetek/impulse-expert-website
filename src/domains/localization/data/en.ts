@@ -30,7 +30,7 @@ export const en = {
     hero: {
         eyebrow: 'Reliable infrastructure for innovators',
         title: 'Build without',
-        accent: 'limits.',
+        accent: 'limits',
         text: 'We deploy, manage and secure infrastructure for Web3, cloud and AI — so your team can focus on what matters.',
         talk: 'Talk to an Expert',
         explore: 'Explore Services',
@@ -38,7 +38,7 @@ export const en = {
     },
     services: {
         eyebrow: 'Designed for what comes next',
-        title: 'Infrastructure for what’s next.',
+        title: 'Infrastructure for what’s next',
         intro: 'From decentralized networks to enterprise cloud and AI workloads, we deliver secure, scalable and high-performance infrastructure for innovative teams.',
         expertise: 'Our Expertise',
         expertiseIntro: 'End-to-end solutions for modern business challenges',
@@ -229,7 +229,7 @@ export const en = {
     },
     proof: {
         eyebrow: 'Built for ambitious teams',
-        title: 'Trusted where uptime matters.',
+        title: 'Trusted where uptime matters',
         metricsLabel: 'Company metrics',
         metricsNote:
             'Coverage and target values depend on the agreed service scope. Measurement rules and reporting windows are documented for each project.',
