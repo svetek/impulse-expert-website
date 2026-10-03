@@ -1,6 +1,7 @@
 ---
-import { Image } from 'astro:assets';
 import infrastructureImage from '../../../../../../../assets/images/infra-network.png';
+import infrastructureLightImage from '../../../../../../../assets/images/infra-network-light.png';
+import ThemeImage from '../../../../../../../components/atoms/ThemeImage/ThemeImage.astro';
 import ServiceVisualFrame from '../../ServiceVisualFrame.astro';
 import styles from './InfrastructureVisual.module.css';
 
@@ -13,14 +14,12 @@ const { alt, alternate = false } = Astro.props;
 ---
 
 <ServiceVisualFrame class={styles['visual']} {alternate}>
-    <Image
+    <ThemeImage
         class={styles['image']}
-        src={infrastructureImage}
+        darkSrc={infrastructureImage}
+        lightSrc={infrastructureLightImage}
         {alt}
-        width={1280}
-        widths={[480, 720, 960, 1280]}
-        sizes="(max-width: 900px) 100vw, 50vw"
-        quality="high"
-        loading="lazy"
+        desktopWidth={1280}
+        mobileWidth={720}
     />
 </ServiceVisualFrame>

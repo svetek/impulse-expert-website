@@ -1,8 +1,41 @@
 .visual {
+    --node-border: #168cff;
+    --node-background: linear-gradient(
+        145deg,
+        rgba(28, 188, 255, 0.45),
+        rgba(2, 26, 70, 0.8)
+    );
+    --node-inner-line: rgba(255, 255, 255, 0.23);
+    --node-shadow:
+        0 0 24px rgba(0, 131, 255, 0.4), inset 0 0 20px rgba(0, 154, 255, 0.22);
+    --core-border: var(--color-cyan);
+    --core-background: #03214a;
+    --core-symbol: var(--color-cyan);
+    --core-shadow: 0 0 55px #006dff;
+
     background: radial-gradient(
         circle at 52% 48%,
         rgba(0, 117, 255, 0.25),
         transparent 38%
+    );
+}
+
+:global(html[data-theme='light']) .visual {
+    --node-border: #168bd1;
+    --node-background: linear-gradient(145deg, #f8fcff, #88bee7);
+    --node-inner-line: rgba(9, 76, 126, 0.25);
+    --node-shadow:
+        0 9px 20px rgba(27, 82, 128, 0.22),
+        inset 0 0 18px rgba(255, 255, 255, 0.72);
+    --core-border: #087fae;
+    --core-background: linear-gradient(145deg, #ffffff, #c5e3f6);
+    --core-symbol: #087aa7;
+    --core-shadow: 0 12px 30px rgba(29, 83, 128, 0.28);
+
+    background: radial-gradient(
+        circle at 52% 48%,
+        rgba(52, 150, 218, 0.2),
+        transparent 42%
     );
 }
 
@@ -22,22 +55,16 @@
     width: 64px;
     height: 64px;
     transform: rotate(30deg) skew(-5deg);
-    border: 1px solid #168cff;
-    background: linear-gradient(
-        145deg,
-        rgba(28, 188, 255, 0.45),
-        rgba(2, 26, 70, 0.8)
-    );
-    box-shadow:
-        0 0 24px rgba(0, 131, 255, 0.4),
-        inset 0 0 20px rgba(0, 154, 255, 0.22);
+    border: 1px solid var(--node-border);
+    background: var(--node-background);
+    box-shadow: var(--node-shadow);
 }
 
 .node::after {
     content: '';
     position: absolute;
     inset: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.23);
+    border: 1px solid var(--node-inner-line);
 }
 
 .n1 {
@@ -73,13 +100,13 @@
     display: grid;
     place-items: center;
     transform: rotate(45deg);
-    border: 1px solid var(--color-cyan);
-    background: #03214a;
-    box-shadow: 0 0 55px #006dff;
+    border: 1px solid var(--core-border);
+    background: var(--core-background);
+    box-shadow: var(--core-shadow);
 }
 
 .node-core span {
     transform: rotate(-45deg);
-    color: var(--color-cyan);
+    color: var(--core-symbol);
     font-size: 2.8rem;
 }

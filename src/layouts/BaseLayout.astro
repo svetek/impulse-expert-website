@@ -1,6 +1,7 @@
 ---
 import AnalyticsConsent from '../components/organisms/AnalyticsConsent/AnalyticsConsent.astro';
 import SeoHead from '../components/seo/SeoHead/SeoHead.astro';
+import { ClientRouter } from 'astro:transitions';
 import type { SiteContent } from '../domains/site/interfaces/site-content.interface';
 import type { Locale } from '../domains/localization/types/locale.type';
 import '../styles/fonts.css';
@@ -47,9 +48,13 @@ const {
             alternatePaths={alternatePaths}
             structuredData={structuredData}
         />
+        <ClientRouter />
     </head>
     <body>
         <slot />
         <AnalyticsConsent content={analytics} />
+        <script>
+            import '../scripts/smooth-anchor-scroll';
+        </script>
     </body>
 </html>

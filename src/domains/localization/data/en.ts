@@ -26,6 +26,8 @@ export const en = {
         ],
         talk: 'Talk to an Expert',
         switchLanguageLabel: 'Русская версия',
+        switchToLightTheme: 'Switch to light theme',
+        switchToDarkTheme: 'Switch to dark theme',
     },
     hero: {
         eyebrow: 'Reliable infrastructure for innovators',

@@ -6,7 +6,7 @@
     padding: 10px 14px;
     border-radius: var(--radius-sm);
     background: var(--color-cyan);
-    color: #00101c;
+    color: var(--color-on-accent);
     font-weight: 800;
 }
 
@@ -48,7 +48,7 @@
 .hero-copy > p {
     max-width: 650px;
     margin-bottom: 32px;
-    color: #c1cede;
+    color: var(--color-text-soft);
     font-size: clamp(1.05rem, 1.4vw, 1.25rem);
     line-height: 1.75;
 }
@@ -56,7 +56,7 @@
 .details {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2px;
+    gap: var(--grid-gap-sm);
     padding-bottom: 120px;
 }
 
@@ -64,7 +64,12 @@
     min-height: 330px;
     padding: clamp(32px, 5vw, 64px);
     border: 1px solid var(--color-line);
-    background: linear-gradient(145deg, #08182b, #040d19);
+    border-radius: var(--radius-md);
+    background: linear-gradient(
+        145deg,
+        var(--color-panel-start),
+        var(--color-panel-end)
+    );
 }
 
 .details h2,
@@ -84,7 +89,7 @@
 .details li {
     position: relative;
     padding-left: 24px;
-    color: #c8d5e3;
+    color: var(--color-text-soft);
 }
 
 .details li::before {
@@ -99,7 +104,7 @@
 }
 
 .details p {
-    color: #c8d5e3;
+    color: var(--color-text-soft);
     font-size: 1.05rem;
     line-height: 1.8;
 }
@@ -111,7 +116,7 @@
 .related-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+    gap: var(--grid-gap-sm);
 }
 
 .related-grid a {
@@ -120,6 +125,7 @@
     gap: 8px 24px;
     padding: 28px;
     border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
     background: var(--color-bg-soft);
     transition:
         border-color 0.2s,

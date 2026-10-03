@@ -4,6 +4,7 @@ import { localeConfig } from '../../../domains/localization/config/locale.config
 import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
 import type { Locale } from '../../../domains/localization/types/locale.type';
 import ActionLink from '../../atoms/Action/ActionLink.astro';
+import ThemeToggle from '../../atoms/ThemeToggle/ThemeToggle.astro';
 import Brand from '../../molecules/Brand/Brand.astro';
 
 interface Props {
@@ -36,6 +37,10 @@ const getNavigationHref = (href: string) => `${navigationBase}${href}`;
                 <a href={getNavigationHref(href)}>{label}</a>
             ))}
         </nav>
+        <ThemeToggle
+            lightLabel={content.switchToLightTheme}
+            darkLabel={content.switchToDarkTheme}
+        />
         <a
             class:list={[styles['locale-switch']]}
             href={alternatePath}
@@ -82,53 +87,79 @@ const getNavigationHref = (href: string) => `${navigationBase}${href}`;
 </header>
 
 <script>
-    const menuButton =
-        document.querySelector<HTMLButtonElement>('[data-menu-button]');
-    const mobileNav = document.querySelector<HTMLElement>('[data-mobile-nav]');
+    let headerController: AbortController | undefined;
 
-    const setMenuOpen = (open: boolean) => {
-        if (!menuButton || !mobileNav) return;
-        menuButton.setAttribute('aria-expanded', String(open));
-        menuButton.setAttribute(
-            'aria-label',
-            open
-                ? (menuButton.dataset.closeLabel ?? '')
-                : (menuButton.dataset.openLabel ?? ''),
+    const initializeHeader = () => {
+        headerController?.abort();
+        headerController = new AbortController();
+        const { signal } = headerController;
+        const menuButton =
+            document.querySelector<HTMLButtonElement>('[data-menu-button]');
+        const mobileNav =
+            document.querySelector<HTMLElement>('[data-mobile-nav]');
+
+        const setMenuOpen = (open: boolean) => {
+            if (!menuButton || !mobileNav) return;
+            menuButton.setAttribute('aria-expanded', String(open));
+            menuButton.setAttribute(
+                'aria-label',
+                open
+                    ? (menuButton.dataset.closeLabel ?? '')
+                    : (menuButton.dataset.openLabel ?? ''),
+            );
+            mobileNav.classList.toggle('open', open);
+        };
+
+        menuButton?.addEventListener(
+            'click',
+            () => {
+                const open =
+                    menuButton.getAttribute('aria-expanded') !== 'true';
+                setMenuOpen(open);
+            },
+            { signal },
         );
-        mobileNav.classList.toggle('open', open);
-    };
 
-    menuButton?.addEventListener('click', () => {
-        const open = menuButton.getAttribute('aria-expanded') !== 'true';
-        setMenuOpen(open);
-    });
+        mobileNav?.addEventListener(
+            'click',
+            (event) => {
+                if ((event.target as Element).closest('a')) {
+                    setMenuOpen(false);
+                }
+            },
+            { signal },
+        );
 
-    mobileNav?.addEventListener('click', (event) => {
-        if ((event.target as Element).closest('a')) {
-            setMenuOpen(false);
-        }
-    });
+        document.addEventListener(
+            'keydown',
+            (event) => {
+                if (
+                    event.key === 'Escape' &&
+                    menuButton?.getAttribute('aria-expanded') === 'true'
+                ) {
+                    setMenuOpen(false);
+                    menuButton.focus();
+                }
+            },
+            { signal },
+        );
 
-    document.addEventListener('keydown', (event) => {
-        if (
-            event.key === 'Escape' &&
-            menuButton?.getAttribute('aria-expanded') === 'true'
-        ) {
-            setMenuOpen(false);
-            menuButton.focus();
-        }
-    });
+        const header = document.querySelector('[data-site-header]');
+        let scrollFrame: number | undefined;
+        const updateHeader = () => {
+            if (scrollFrame !== undefined) return;
+            scrollFrame = window.requestAnimationFrame(() => {
+                header?.classList.toggle('scrolled', window.scrollY > 24);
+                scrollFrame = undefined;
+            });
+        };
 
-    const header = document.querySelector('[data-site-header]');
-    let scrollFrame: number | undefined;
-    const updateHeader = () => {
-        if (scrollFrame !== undefined) return;
-        scrollFrame = window.requestAnimationFrame(() => {
-            header?.classList.toggle('scrolled', window.scrollY > 24);
-            scrollFrame = undefined;
+        updateHeader();
+        window.addEventListener('scroll', updateHeader, {
+            passive: true,
+            signal,
         });
     };
 
-    updateHeader();
-    window.addEventListener('scroll', updateHeader, { passive: true });
+    document.addEventListener('astro:page-load', initializeHeader);
 </script>

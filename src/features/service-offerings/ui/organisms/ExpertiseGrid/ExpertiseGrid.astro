@@ -11,7 +11,7 @@ const { content } = Astro.props;
 ---
 
 <section class:list={[styles['directions']]} aria-labelledby="directions-title">
-    <div class:list={[styles['shell']]}>
+    <div class:list={['shell', styles['directions-shell']]}>
         <div class:list={[styles['directions-head']]}>
             <h2 id="directions-title">
                 {content.expertise} <span aria-hidden="true"></span>

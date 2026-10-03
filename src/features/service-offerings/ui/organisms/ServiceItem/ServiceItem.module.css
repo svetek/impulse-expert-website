@@ -42,7 +42,7 @@ h3 {
 ul {
     margin: 22px 0 28px;
     padding: 0;
-    color: #c6d4e2;
+    color: var(--color-text-soft);
     list-style: none;
 }
 
@@ -63,7 +63,7 @@ li::before {
     place-items: center;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--color-cyan), var(--color-blue));
-    color: #fff;
+    color: var(--color-action-text);
     font-size: 0.66rem;
     font-weight: 900;
     box-shadow: 0 0 16px rgba(0, 151, 255, 0.28);

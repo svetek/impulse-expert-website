@@ -46,10 +46,17 @@ const analyticsEnabled = Boolean(googleAnalyticsId || yandexMetrikaId);
     is:inline
     define:vars={{ googleAnalyticsId, yandexMetrikaId, analyticsEnabled }}
 >
-    if (analyticsEnabled) {
+    (() => {
+        if (!analyticsEnabled) return;
+
         const consentKey = 'impulse-analytics-consent';
-        const banner = document.querySelector('[data-analytics-consent]');
-        let analyticsLoaded = false;
+        const stateKey = '__impulseAnalyticsState';
+        const state = window[stateKey] || {
+            initialized: false,
+            loaded: false,
+            controller: null,
+        };
+        window[stateKey] = state;
 
         const readConsent = () => {
             try {
@@ -68,8 +75,24 @@ const analyticsEnabled = Boolean(googleAnalyticsId || yandexMetrikaId);
         };
 
         const loadAnalytics = () => {
-            if (analyticsLoaded) return;
-            analyticsLoaded = true;
+            if (state.loaded) {
+                if (googleAnalyticsId && window.gtag) {
+                    window.gtag('config', googleAnalyticsId, {
+                        anonymize_ip: true,
+                        page_path:
+                            window.location.pathname + window.location.search,
+                    });
+                }
+                if (yandexMetrikaId && window.ym) {
+                    window.ym(
+                        Number(yandexMetrikaId),
+                        'hit',
+                        window.location.href,
+                    );
+                }
+                return;
+            }
+            state.loaded = true;
 
             if (googleAnalyticsId) {
                 const script = document.createElement('script');
@@ -106,22 +129,37 @@ const analyticsEnabled = Boolean(googleAnalyticsId || yandexMetrikaId);
             }
         };
 
-        const savedConsent = readConsent();
-        if (savedConsent === 'accepted') loadAnalytics();
-        if (!savedConsent && banner) banner.hidden = false;
+        const initializeConsent = () => {
+            state.controller?.abort();
+            state.controller = new AbortController();
+            const { signal } = state.controller;
+            const banner = document.querySelector('[data-analytics-consent]');
+            const savedConsent = readConsent();
 
-        banner
-            ?.querySelector('[data-analytics-accept]')
-            ?.addEventListener('click', () => {
-                saveConsent('accepted');
-                banner.hidden = true;
-                loadAnalytics();
-            });
-        banner
-            ?.querySelector('[data-analytics-decline]')
-            ?.addEventListener('click', () => {
-                saveConsent('declined');
-                banner.hidden = true;
-            });
-    }
+            if (savedConsent === 'accepted') loadAnalytics();
+            if (!savedConsent && banner) banner.hidden = false;
+
+            banner?.querySelector('[data-analytics-accept]')?.addEventListener(
+                'click',
+                () => {
+                    saveConsent('accepted');
+                    banner.hidden = true;
+                    loadAnalytics();
+                },
+                { signal },
+            );
+            banner?.querySelector('[data-analytics-decline]')?.addEventListener(
+                'click',
+                () => {
+                    saveConsent('declined');
+                    banner.hidden = true;
+                },
+                { signal },
+            );
+        };
+
+        if (state.initialized) return;
+        state.initialized = true;
+        document.addEventListener('astro:page-load', initializeConsent);
+    })();
 </script>

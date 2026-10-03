@@ -1,0 +1,33 @@
+.image {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: var(--theme-image-position, center);
+    background-size: var(--theme-image-size, cover);
+}
+
+.image[data-loaded] {
+    background-image: var(--theme-image-dark);
+}
+
+:global(html[data-theme='light']) .image[data-loaded] {
+    background-image: var(--theme-image-light);
+    background-position: var(
+        --theme-image-light-position,
+        var(--theme-image-position, center)
+    );
+}
+
+@media (max-width: 900px) {
+    .image {
+        background-image: none;
+    }
+
+    .image[data-loaded] {
+        background-image: var(--theme-image-dark-mobile);
+    }
+
+    :global(html[data-theme='light']) .image[data-loaded] {
+        background-image: var(--theme-image-light-mobile);
+    }
+}

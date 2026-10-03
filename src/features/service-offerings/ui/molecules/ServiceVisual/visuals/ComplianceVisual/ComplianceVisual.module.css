@@ -1,9 +1,36 @@
 .visual {
+    --badge-text: #f5f9ff;
+    --badge-border: #1ecbff;
+    --badge-background: #031225;
+    --badge-shadow:
+        0 0 22px rgba(0, 163, 255, 0.35), inset 0 0 22px rgba(0, 120, 255, 0.22);
+    --shield-fill: #06366f;
+    --shield-stroke: #179dff;
+    --shield-lock: var(--color-cyan);
+    --shield-lock-line: #ffffff;
+    --shield-shadow: drop-shadow(0 0 22px var(--color-blue));
+
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 28px;
     background: radial-gradient(circle, #053b8738, transparent 65%);
+}
+
+:global(html[data-theme='light']) .visual {
+    --badge-text: #123d65;
+    --badge-border: #078fc8;
+    --badge-background: linear-gradient(145deg, #ffffff, #d9eaf7);
+    --badge-shadow:
+        0 10px 24px rgba(29, 78, 119, 0.2),
+        inset 0 0 18px rgba(43, 146, 206, 0.13);
+    --shield-fill: #d9ebf8;
+    --shield-stroke: #087ed8;
+    --shield-lock: #0b8eb5;
+    --shield-lock-line: #124d7a;
+    --shield-shadow: drop-shadow(0 10px 18px rgba(26, 82, 128, 0.24));
+
+    background: radial-gradient(circle, #5cafe63d, transparent 66%);
 }
 
 .badge {
@@ -14,12 +41,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 2px solid #1ecbff;
+    border: 2px solid var(--badge-border);
     border-radius: 50%;
-    background: #031225;
-    box-shadow:
-        0 0 22px rgba(0, 163, 255, 0.35),
-        inset 0 0 22px rgba(0, 120, 255, 0.22);
+    background: var(--badge-background);
+    color: var(--badge-text);
+    box-shadow: var(--badge-shadow);
 }
 
 .badge strong {
@@ -45,20 +71,20 @@
 }
 
 .shield svg {
-    fill: #06366f;
-    stroke: #179dff;
+    fill: var(--shield-fill);
+    stroke: var(--shield-stroke);
     stroke-width: 3;
-    filter: drop-shadow(0 0 22px var(--color-blue));
+    filter: var(--shield-shadow);
 }
 
 .shield rect {
-    fill: var(--color-cyan);
+    fill: var(--shield-lock);
     stroke: none;
 }
 
 .shield path:last-child {
     fill: none;
-    stroke: #fff;
+    stroke: var(--shield-lock-line);
     stroke-width: 4;
 }
 

@@ -1,10 +1,11 @@
 ---
 import styles from './HeroSection.module.css';
-import { Image } from 'astro:assets';
 import heroImage from '../../../assets/images/hero-datacenter.png';
+import heroLightImage from '../../../assets/images/hero-datacenter-light.png';
 import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
 import ActionLink from '../../atoms/Action/ActionLink.astro';
 import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+import ThemeImage from '../../atoms/ThemeImage/ThemeImage.astro';
 
 interface Props {
     content: SiteContent['hero'];
@@ -15,14 +16,13 @@ const { content } = Astro.props;
 
 <section class:list={[styles['hero']]} aria-labelledby="hero-title">
     <div class:list={[styles['hero-image']]} aria-hidden="true">
-        <Image
+        <ThemeImage
             class={styles['hero-background']}
-            src={heroImage}
-            alt=""
-            widths={[640, 960, 1280, 1600, 2048]}
-            sizes="100vw"
-            quality="high"
-            priority
+            darkSrc={heroImage}
+            lightSrc={heroLightImage}
+            desktopWidth={2048}
+            mobileWidth={960}
+            eager
         />
     </div>
     <div class:list={[styles['hero-grid']]} aria-hidden="true"></div>

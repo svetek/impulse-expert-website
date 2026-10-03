@@ -19,6 +19,8 @@ export interface SiteContent {
         nav: Array<[label: string, href: string]>;
         talk: string;
         switchLanguageLabel: string;
+        switchToLightTheme: string;
+        switchToDarkTheme: string;
     };
     hero: {
         eyebrow: string;

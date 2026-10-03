@@ -1,6 +1,10 @@
 .proof {
     padding: 105px 0;
-    background: linear-gradient(180deg, #030914, #06101e);
+    background: linear-gradient(
+        180deg,
+        var(--color-section-start),
+        var(--color-section-end)
+    );
 }
 
 .section-heading {
@@ -25,7 +29,7 @@
 .metrics-note {
     max-width: 760px;
     margin: 0 auto 40px;
-    color: #7891aa;
+    color: var(--color-text-faint);
     font-size: 0.78rem;
     line-height: 1.6;
     text-align: center;
@@ -49,7 +53,7 @@
 }
 
 .metrics span {
-    color: #7891aa;
+    color: var(--color-text-faint);
     font-size: 0.74rem;
     letter-spacing: 0.11em;
     text-transform: uppercase;
@@ -58,7 +62,7 @@
 .quotes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    gap: var(--grid-gap-sm);
 }
 
 figure {
@@ -72,14 +76,14 @@ figure {
     border-radius: var(--radius-md);
     background: linear-gradient(
         145deg,
-        rgba(10, 28, 50, 0.8),
-        rgba(5, 16, 31, 0.9)
+        var(--color-card-start),
+        var(--color-card-end)
     );
 }
 
 blockquote {
     margin: 0;
-    color: #dbe7f3;
+    color: var(--color-text-soft);
     font-size: 0.94rem;
     line-height: 1.55;
 }
@@ -111,7 +115,7 @@ figcaption strong {
 }
 
 figcaption small {
-    color: #71889f;
+    color: var(--color-text-faint);
     font-size: 0.68rem;
 }
 
@@ -125,7 +129,13 @@ figcaption small {
     }
 
     .quotes {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .quotes figure:last-child:nth-child(odd) {
+        width: calc((100% - var(--grid-gap-sm)) / 2);
+        grid-column: 1 / -1;
+        justify-self: center;
     }
 }
 
@@ -140,5 +150,14 @@ figcaption small {
 
     .metrics span {
         font-size: 0.62rem;
+    }
+
+    .quotes {
+        grid-template-columns: 1fr;
+    }
+
+    .quotes figure:last-child:nth-child(odd) {
+        width: 100%;
+        grid-column: auto;
     }
 }

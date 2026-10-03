@@ -26,6 +26,8 @@ export const ru = {
         ],
         talk: 'Обсудить проект',
         switchLanguageLabel: 'English version',
+        switchToLightTheme: 'Включить светлую тему',
+        switchToDarkTheme: 'Включить тёмную тему',
     },
     hero: {
         eyebrow: 'Надёжная инфраструктура для новаторов',

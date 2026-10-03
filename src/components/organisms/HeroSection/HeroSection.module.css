@@ -13,11 +13,14 @@
 }
 
 .hero-background {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 58% center;
+    --theme-image-position: 58% center;
+    --theme-image-light-position: 58% center;
+
     filter: saturate(1.13) contrast(1.06);
+}
+
+:global(html[data-theme='light']) .hero-background {
+    filter: saturate(0.96) contrast(1.02);
 }
 
 .hero-image::after {
@@ -27,10 +30,10 @@
     background:
         linear-gradient(
             90deg,
-            #010710 0%,
-            rgba(1, 7, 16, 0.95) 24%,
-            rgba(1, 7, 16, 0.25) 56%,
-            rgba(1, 7, 16, 0.12) 100%
+            var(--color-hero-solid) 0%,
+            var(--color-hero-strong) 24%,
+            var(--color-hero-soft) 56%,
+            var(--color-hero-faint) 100%
         ),
         linear-gradient(0deg, var(--color-bg) 0%, transparent 24%);
 }
@@ -39,8 +42,8 @@
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(38, 161, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(38, 161, 255, 0.05) 1px, transparent 1px);
+        linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
     background-size: 52px 52px;
     mask-image: linear-gradient(90deg, #000, transparent 65%);
 }
@@ -66,7 +69,7 @@ h1 span {
 
 .hero-lede {
     max-width: 555px;
-    color: #d2dbe5;
+    color: var(--color-text-soft);
     font-size: 1.12rem;
     line-height: 1.55;
 }
@@ -83,7 +86,7 @@ h1 span {
     left: 50%;
     z-index: 2;
     transform: translateX(-50%);
-    color: #7790a9;
+    color: var(--color-text-faint);
     font-size: 0.68rem;
     letter-spacing: 0.13em;
     text-transform: uppercase;
@@ -105,19 +108,29 @@ h1 span {
     }
 
     .hero-background {
-        object-position: 68% center;
+        --theme-image-position: 68% center;
+        --theme-image-light-position: 68% center;
+
         opacity: 0.72;
+    }
+
+    :global(html[data-theme='light']) .hero-background {
+        opacity: 0.88;
     }
 
     .hero-image::after {
         background:
-            linear-gradient(0deg, #020812 5%, rgba(2, 8, 18, 0.34) 70%),
+            linear-gradient(
+                0deg,
+                var(--color-bg) 5%,
+                var(--color-hero-soft) 70%
+            ),
             linear-gradient(
                 90deg,
-                #010710 0%,
-                rgba(1, 7, 16, 0.95) 24%,
-                rgba(1, 7, 16, 0.25) 56%,
-                rgba(1, 7, 16, 0.12) 100%
+                var(--color-hero-solid) 0%,
+                var(--color-hero-strong) 24%,
+                var(--color-hero-soft) 56%,
+                var(--color-hero-faint) 100%
             );
     }
 
@@ -132,7 +145,8 @@ h1 span {
     }
 
     .hero-background {
-        object-position: 64% center;
+        --theme-image-position: 64% center;
+        --theme-image-light-position: 64% center;
     }
 
     .hero-content {

@@ -7,8 +7,8 @@
     padding: 20px;
     border: 1px solid rgba(33, 200, 255, 0.45);
     border-radius: var(--radius-md);
-    background: #061426;
-    box-shadow: 0 18px 70px rgba(0, 0, 0, 0.52);
+    background: var(--color-panel);
+    box-shadow: 0 18px 70px var(--shadow-elevated);
 }
 
 .analytics-consent[hidden] {
@@ -17,7 +17,7 @@
 
 .analytics-consent p {
     margin: 0 0 15px;
-    color: #c9d6e3;
+    color: var(--color-text-soft);
     font-size: 0.84rem;
     line-height: 1.5;
 }
@@ -32,7 +32,7 @@
     padding: 9px 4px;
     border: 0;
     background: none;
-    color: #aebed0;
+    color: var(--color-muted);
     cursor: pointer;
 }
 
