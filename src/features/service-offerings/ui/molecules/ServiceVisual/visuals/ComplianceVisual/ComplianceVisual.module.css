@@ -17,7 +17,7 @@
     background: radial-gradient(circle, #053b8738, transparent 65%);
 }
 
-:global(html[data-theme='light']) .visual {
+:global(html[data-theme-appearance='light']) .visual {
     --badge-text: #123d65;
     --badge-border: #078fc8;
     --badge-background: linear-gradient(145deg, #ffffff, #d9eaf7);

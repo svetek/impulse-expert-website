@@ -25,7 +25,8 @@ src/
 │   └── seo/        # Non-visual metadata and structured data
 ├── domains/
 │   ├── localization/ # Locale configuration and independent EN/RU content
-│   └── site/         # Site-wide content contracts and technical config
+│   ├── site/         # Site-wide content contracts and technical config
+│   └── theme/        # Theme definitions, runtime service and head bootstrap
 ├── features/
 │   └── service-offerings/
 │       ├── config/     # Stable service slugs and localized route helpers
@@ -42,6 +43,18 @@ The UI follows Atomic Design at two scopes: reusable UI lives in `components/`, 
 Component classification and dependency rules are documented in [`docs/atomic-design.md`](docs/atomic-design.md).
 
 Each locale is defined independently in `src/domains/localization/data/en.ts` and `ru.ts`. Both objects must satisfy the same TypeScript content contract, so missing translations fail during type checking.
+
+## Themes
+
+`src/domains/theme/config/theme.config.ts` is the single source of truth for theme identifiers, order, browser colors, system preferences, semantic appearance and CSS color tokens. The head bootstrap, theme switcher and runtime service are generated from this config.
+
+To add another theme:
+
+1. Add its definition to `themeConfig`. TypeScript requires the complete token contract.
+2. Add its localized name to `header.themeNames` in `en.ts` and `ru.ts`.
+3. Choose `appearance: 'light'` or `appearance: 'dark'` so images and technical illustrations use the appropriate visual variant.
+
+The switcher order and `ThemeId` union update automatically. Components must use semantic tokens or `data-theme-appearance`; they must not check a concrete theme identifier.
 
 ## Checks and production build
 

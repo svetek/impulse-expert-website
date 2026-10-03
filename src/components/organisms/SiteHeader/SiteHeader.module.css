@@ -11,12 +11,12 @@
     backdrop-filter: blur(4px);
     transition:
         background 0.2s,
-        border-color 0.2s;
+        box-shadow 0.2s;
 }
 
 .site-header:global(.scrolled) {
     background: var(--color-header-scrolled);
-    border-bottom: 1px solid var(--color-line);
+    box-shadow: 0 12px 30px var(--shadow-header);
 }
 
 .nav-wrap {

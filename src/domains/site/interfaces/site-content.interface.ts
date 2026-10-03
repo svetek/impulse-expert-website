@@ -1,5 +1,6 @@
 import type { Locale } from '../../localization/types/locale.type';
 import type { ServiceOfferingsContent } from '../../../features/service-offerings/interfaces/service-content.interface';
+import type { ThemeId } from '../../theme/types/theme-id.type';
 
 export interface SiteContent {
     locale: Locale;
@@ -19,8 +20,8 @@ export interface SiteContent {
         nav: Array<[label: string, href: string]>;
         talk: string;
         switchLanguageLabel: string;
-        switchToLightTheme: string;
-        switchToDarkTheme: string;
+        themeSwitcherLabel: string;
+        themeNames: Record<ThemeId, string>;
     };
     hero: {
         eyebrow: string;

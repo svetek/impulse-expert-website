@@ -1,6 +1,7 @@
 ---
 import { getImage } from 'astro:assets';
 import socialImageSource from '../../../assets/images/hero-datacenter.png';
+import ThemeHead from '../../../domains/theme/ui/ThemeHead.astro';
 import { siteConfig } from '../../../domains/site/config/site.config';
 import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
 import type { Locale } from '../../../domains/localization/types/locale.type';
@@ -83,29 +84,7 @@ const schemaGraph = {
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#020812" />
-<script is:inline>
-    (() => {
-        const storageKey = 'impulse-theme';
-        let savedTheme = null;
-        try {
-            savedTheme = localStorage.getItem(storageKey);
-        } catch {
-            // Follow the operating system when storage is unavailable.
-        }
-        const theme =
-            savedTheme === 'light' || savedTheme === 'dark'
-                ? savedTheme
-                : matchMedia('(prefers-color-scheme: light)').matches
-                  ? 'light'
-                  : 'dark';
-        document.documentElement.dataset.theme = theme;
-        document.documentElement.style.colorScheme = theme;
-        document
-            .querySelector('meta[name="theme-color"]')
-            ?.setAttribute('content', theme === 'dark' ? '#020812' : '#f4f8fc');
-    })();
-</script>
+<ThemeHead />
 <meta name="description" content={pageDescription} />
 <meta name="robots" content={robots} />
 {canonical && <link rel="canonical" href={canonical} />}

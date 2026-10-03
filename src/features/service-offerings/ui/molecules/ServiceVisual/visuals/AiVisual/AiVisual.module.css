@@ -14,7 +14,7 @@
     background: radial-gradient(circle, #0a66df33, transparent 55%);
 }
 
-:global(html[data-theme='light']) .visual {
+:global(html[data-theme-appearance='light']) .visual {
     --chip-text: #0a3f70;
     --chip-border: #168cd2;
     --chip-background: linear-gradient(145deg, #ffffff, #bddcf5);

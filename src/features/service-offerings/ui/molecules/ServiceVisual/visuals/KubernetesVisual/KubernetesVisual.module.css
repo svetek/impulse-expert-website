@@ -44,11 +44,11 @@
     stroke-width: 5;
 }
 
-:global(html[data-theme='light']) .mark {
+:global(html[data-theme-appearance='light']) .mark {
     filter: drop-shadow(0 8px 18px rgba(35, 82, 125, 0.24));
 }
 
-:global(html[data-theme='light']) .mark polygon {
+:global(html[data-theme-appearance='light']) .mark polygon {
     fill: #0878dc;
     stroke: #70dcf5;
 }

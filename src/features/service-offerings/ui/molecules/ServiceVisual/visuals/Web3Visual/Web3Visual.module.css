@@ -20,7 +20,7 @@
     );
 }
 
-:global(html[data-theme='light']) .visual {
+:global(html[data-theme-appearance='light']) .visual {
     --node-border: #168bd1;
     --node-background: linear-gradient(145deg, #f8fcff, #88bee7);
     --node-inner-line: rgba(9, 76, 126, 0.25);

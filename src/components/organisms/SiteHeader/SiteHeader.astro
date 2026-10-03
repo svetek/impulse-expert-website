@@ -4,7 +4,7 @@ import { localeConfig } from '../../../domains/localization/config/locale.config
 import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
 import type { Locale } from '../../../domains/localization/types/locale.type';
 import ActionLink from '../../atoms/Action/ActionLink.astro';
-import ThemeToggle from '../../atoms/ThemeToggle/ThemeToggle.astro';
+import ThemeSwitcher from '../../atoms/ThemeSwitcher/ThemeSwitcher.astro';
 import Brand from '../../molecules/Brand/Brand.astro';
 
 interface Props {
@@ -37,9 +37,9 @@ const getNavigationHref = (href: string) => `${navigationBase}${href}`;
                 <a href={getNavigationHref(href)}>{label}</a>
             ))}
         </nav>
-        <ThemeToggle
-            lightLabel={content.switchToLightTheme}
-            darkLabel={content.switchToDarkTheme}
+        <ThemeSwitcher
+            label={content.themeSwitcherLabel}
+            themeNames={content.themeNames}
         />
         <a
             class:list={[styles['locale-switch']]}

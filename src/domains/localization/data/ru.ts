@@ -26,8 +26,11 @@ export const ru = {
         ],
         talk: 'Обсудить проект',
         switchLanguageLabel: 'English version',
-        switchToLightTheme: 'Включить светлую тему',
-        switchToDarkTheme: 'Включить тёмную тему',
+        themeSwitcherLabel: 'Переключить тему',
+        themeNames: {
+            dark: 'Тёмная',
+            light: 'Светлая',
+        },
     },
     hero: {
         eyebrow: 'Надёжная инфраструктура для новаторов',

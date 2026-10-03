@@ -1,0 +1,46 @@
+---
+import { themeConfig, themeIds, themeSettings } from '../config/theme.config';
+import {
+    initializeThemeController,
+    type RuntimeThemeDefinition,
+} from '../services/theme.service';
+
+const declarations = (themeId: (typeof themeIds)[number]) => {
+    const definition = themeConfig[themeId];
+    const tokens = Object.entries(definition.tokens)
+        .map(([name, value]) => `${name}:${value}`)
+        .join(';');
+    return `color-scheme:${definition.colorScheme};${tokens}`;
+};
+const defaultTheme = themeSettings.defaultTheme;
+const explicitRules = themeIds
+    .map(
+        (themeId) =>
+            `:root[${themeSettings.attribute}='${themeId}']{${declarations(themeId)}}`,
+    )
+    .join('');
+const themeCss = `:root{${declarations(defaultTheme)}}${explicitRules}`;
+const runtimeThemes: RuntimeThemeDefinition[] = themeIds.map((themeId) => {
+    const { appearance, browserColor, colorScheme, systemPreference } =
+        themeConfig[themeId];
+    return {
+        id: themeId,
+        appearance,
+        browserColor,
+        colorScheme,
+        systemPreference,
+    };
+});
+const bootstrapScript = `(${initializeThemeController.toString()})(${JSON.stringify(runtimeThemes)},${JSON.stringify(themeSettings)});`;
+---
+
+<meta name="theme-color" content={themeConfig[defaultTheme].browserColor} />
+<style is:inline set:html={themeCss}></style>
+<script is:inline set:html={bootstrapScript}></script>
+<noscript>
+    <style is:inline>
+        [data-theme-switcher] {
+            display: none;
+        }
+    </style>
+</noscript>

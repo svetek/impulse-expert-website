@@ -10,7 +10,7 @@
     background-image: var(--theme-image-dark);
 }
 
-:global(html[data-theme='light']) .image[data-loaded] {
+:global(html[data-theme-appearance='light']) .image[data-loaded] {
     background-image: var(--theme-image-light);
     background-position: var(
         --theme-image-light-position,
@@ -27,7 +27,7 @@
         background-image: var(--theme-image-dark-mobile);
     }
 
-    :global(html[data-theme='light']) .image[data-loaded] {
+    :global(html[data-theme-appearance='light']) .image[data-loaded] {
         background-image: var(--theme-image-light-mobile);
     }
 }

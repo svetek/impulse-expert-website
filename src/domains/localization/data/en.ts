@@ -26,8 +26,11 @@ export const en = {
         ],
         talk: 'Talk to an Expert',
         switchLanguageLabel: 'Русская версия',
-        switchToLightTheme: 'Switch to light theme',
-        switchToDarkTheme: 'Switch to dark theme',
+        themeSwitcherLabel: 'Switch theme',
+        themeNames: {
+            dark: 'Dark',
+            light: 'Light',
+        },
     },
     hero: {
         eyebrow: 'Reliable infrastructure for innovators',
