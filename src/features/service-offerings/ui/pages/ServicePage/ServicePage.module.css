@@ -40,6 +40,8 @@
 }
 
 .hero-copy h1 {
+    position: relative;
+    z-index: 2;
     margin-bottom: 24px;
     font-size: clamp(2.8rem, 5vw, 5.4rem);
     line-height: 0.98;
