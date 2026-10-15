@@ -270,8 +270,9 @@ export const en = {
         talk: 'Talk to an Expert',
         details: {
             title: 'Let’s start a conversation',
-            text: 'Call us or visit our Vancouver office to discuss your infrastructure needs.',
+            text: 'Call, email or visit our Vancouver office to discuss your infrastructure needs.',
             phoneLabel: 'Call us',
+            emailLabel: 'Email us',
             addressLabel: 'Visit us',
             mapLabel: 'Open in Google Maps',
         },

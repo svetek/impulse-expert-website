@@ -28,7 +28,7 @@
 
 .contact-grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--grid-gap-md);
 }
 
@@ -53,10 +53,42 @@
         box-shadow 0.2s;
 }
 
-.contact-card:hover {
+.contact-card:not(.communication-card):hover,
+.contact-card:not(.communication-card):focus-visible {
     transform: translateY(-3px);
     border-color: var(--color-cyan);
     box-shadow: 0 22px 62px var(--shadow-elevated);
+}
+
+.communication-card {
+    display: flex;
+    padding-block: 18px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-method {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding: 16px 12px;
+    align-items: center;
+    gap: 22px;
+    border-radius: calc(var(--radius-md) / 2);
+    transition:
+        background-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.contact-method + .contact-method {
+    border-top: 1px solid var(--color-line);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.contact-method:hover,
+.contact-method:focus-visible {
+    background: color-mix(in srgb, var(--color-cyan) 14%, transparent);
+    box-shadow: inset 3px 0 0 var(--color-cyan);
 }
 
 .icon {
@@ -68,6 +100,19 @@
     border-radius: 50%;
     background: var(--color-control-bg);
     color: var(--color-cyan);
+    transition:
+        color 0.2s,
+        border-color 0.2s,
+        background-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.contact-method:hover .icon,
+.contact-method:focus-visible .icon {
+    border-color: var(--color-cyan);
+    background: var(--color-cyan);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color-cyan) 35%, transparent);
+    color: var(--color-on-accent);
 }
 
 .icon svg {
@@ -95,6 +140,7 @@
 }
 
 .card-copy strong {
+    overflow-wrap: anywhere;
     color: var(--color-text);
     font-family: var(--font-heading);
     font-size: clamp(1.05rem, 2vw, 1.35rem);
@@ -112,8 +158,17 @@
     transition: transform 0.2s;
 }
 
-.contact-card:hover .arrow {
+.contact-card:not(.communication-card):hover .arrow,
+.contact-card:not(.communication-card):focus-visible .arrow,
+.contact-method:hover .arrow,
+.contact-method:focus-visible .arrow {
     transform: translate(2px, -2px);
+}
+
+@media (max-width: 1000px) {
+    .contact-card {
+        padding-inline: 24px;
+    }
 }
 
 @media (max-width: 760px) {
@@ -127,7 +182,8 @@
 }
 
 @media (max-width: 480px) {
-    .contact-card {
+    .contact-card:not(.communication-card),
+    .contact-method {
         grid-template-columns: auto minmax(0, 1fr);
         gap: 16px;
     }
@@ -139,6 +195,8 @@
 
 @media (prefers-reduced-motion: reduce) {
     .contact-card,
+    .contact-method,
+    .icon,
     .arrow {
         transition: none;
     }

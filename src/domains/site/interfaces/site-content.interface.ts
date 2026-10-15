@@ -51,6 +51,7 @@ export interface SiteContent {
             title: string;
             text: string;
             phoneLabel: string;
+            emailLabel: string;
             addressLabel: string;
             mapLabel: string;
         };
