@@ -49,13 +49,12 @@
     box-shadow: 0 18px 52px var(--shadow-elevated);
     transition:
         border-color 0.2s,
-        transform 0.2s,
+        background 0.2s,
         box-shadow 0.2s;
 }
 
 .contact-card:not(.communication-card):hover,
 .contact-card:not(.communication-card):focus-visible {
-    transform: translateY(-3px);
     border-color: var(--color-cyan);
     background:
         linear-gradient(
