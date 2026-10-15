@@ -20,7 +20,7 @@
 }
 
 .nav-wrap {
-    height: var(--header-height);
+    height: var(--nav-height);
     display: flex;
     align-items: center;
     gap: 42px;

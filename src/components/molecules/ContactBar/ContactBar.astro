@@ -1,0 +1,38 @@
+---
+import styles from './ContactBar.module.css';
+import { siteConfig } from '../../../domains/site/config/site.config';
+
+interface Props {
+    prompt: string;
+    contactHref: string;
+}
+
+const { prompt, contactHref } = Astro.props;
+const { phone, address } = siteConfig.contact;
+---
+
+<div class:list={[styles['contact-bar']]}>
+    <div class:list={['shell', styles['contact-bar-inner']]}>
+        <a class:list={[styles['prompt']]} href={contactHref}>
+            {prompt}
+        </a>
+        <a class:list={[styles['contact-item']]} href={phone.href}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.6 3.5 9 8.2 7.3 9.9a15.7 15.7 0 0 0 6.8 6.8l1.7-1.7 4.7 2.4v2.1a2 2 0 0 1-2 2A16 16 0 0 1 2.5 5.5a2 2 0 0 1 2-2Z"></path>
+            </svg>
+            <span>{phone.display}</span>
+        </a>
+        <a
+            class:list={[styles['contact-item'], styles['address']]}
+            href={address.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="2.5"></circle>
+            </svg>
+            <span>{address.display}</span>
+        </a>
+    </div>
+</div>

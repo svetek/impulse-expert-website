@@ -20,7 +20,6 @@ export interface ServiceOfferingsContent {
     title: string;
     intro: string;
     expertise: string;
-    expertiseIntro: string;
     learnMore: string;
     items: ServiceContent[];
     imageAlt: [cloud: string, containers: string];

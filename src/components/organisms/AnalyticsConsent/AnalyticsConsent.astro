@@ -76,13 +76,6 @@ const analyticsEnabled = Boolean(googleAnalyticsId || yandexMetrikaId);
 
         const loadAnalytics = () => {
             if (state.loaded) {
-                if (googleAnalyticsId && window.gtag) {
-                    window.gtag('config', googleAnalyticsId, {
-                        anonymize_ip: true,
-                        page_path:
-                            window.location.pathname + window.location.search,
-                    });
-                }
                 if (yandexMetrikaId && window.ym) {
                     window.ym(
                         Number(yandexMetrikaId),

@@ -17,6 +17,7 @@ export const en = {
         openMenu: 'Open menu',
         closeMenu: 'Close menu',
         homeLabel: 'Impulse Expert home',
+        contactPrompt: 'Get in touch today',
         nav: [
             ['Services', '#services'],
             ['Solutions', '#solutions'],
@@ -39,14 +40,12 @@ export const en = {
         text: 'We deploy, manage and secure infrastructure for Web3, cloud and AI — so your team can focus on what matters.',
         talk: 'Talk to an Expert',
         explore: 'Explore Services',
-        scroll: 'Explore infrastructure',
     },
     services: {
         eyebrow: 'Designed for what comes next',
         title: 'Infrastructure for what’s next',
         intro: 'From decentralized networks to enterprise cloud and AI workloads, we deliver secure, scalable and high-performance infrastructure for innovative teams.',
         expertise: 'Our Expertise',
-        expertiseIntro: 'End-to-end solutions for modern business challenges',
         learnMore: 'Learn more',
         items: [
             {
@@ -233,7 +232,6 @@ export const en = {
         },
     },
     proof: {
-        eyebrow: 'Built for ambitious teams',
         title: 'Trusted where uptime matters',
         metricsLabel: 'Company metrics',
         metricsNote:
@@ -270,7 +268,13 @@ export const en = {
         title: 'Ready to scale your infrastructure?',
         text: 'Tell us what you’re building. We’ll map the right path from architecture to operations.',
         talk: 'Talk to an Expert',
-        explore: 'Explore Services',
+        details: {
+            title: 'Let’s start a conversation',
+            text: 'Call us or visit our Vancouver office to discuss your infrastructure needs.',
+            phoneLabel: 'Call us',
+            addressLabel: 'Visit us',
+            mapLabel: 'Open in Google Maps',
+        },
     },
     footer: {
         text: 'Infrastructure engineered for momentum.',

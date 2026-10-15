@@ -7,7 +7,9 @@
     --grid-gap-lg: clamp(24px, 3vw, 40px);
     --radius-sm: 5px;
     --radius-md: 8px;
-    --header-height: 84px;
+    --contact-bar-height: 40px;
+    --nav-height: 84px;
+    --header-height: calc(var(--contact-bar-height) + var(--nav-height));
 }
 
 * {
@@ -78,7 +80,8 @@ button:focus-visible {
 @media (max-width: 900px) {
     :root {
         --content-width: min(100% - 32px, 720px);
-        --header-height: 72px;
+        --contact-bar-height: 38px;
+        --nav-height: 72px;
     }
 }
 

@@ -64,6 +64,14 @@ const organizationSchema = {
     name: siteName,
     url: new URL('/', site).href,
     email: siteConfig.email,
+    telephone: siteConfig.contact.phone.display,
+    address: {
+        '@type': 'PostalAddress',
+        streetAddress: siteConfig.contact.address.streetAddress,
+        addressLocality: siteConfig.contact.address.locality,
+        addressRegion: siteConfig.contact.address.region,
+        addressCountry: siteConfig.contact.address.country,
+    },
     description: seo.description,
 };
 const websiteSchema = {

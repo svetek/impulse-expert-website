@@ -80,26 +80,6 @@ h1 span {
     margin-top: 32px;
 }
 
-.scroll-cue {
-    position: absolute;
-    bottom: 25px;
-    left: 50%;
-    z-index: 2;
-    transform: translateX(-50%);
-    color: var(--color-text-faint);
-    font-size: 0.68rem;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-}
-
-.scroll-cue span {
-    display: block;
-    width: 1px;
-    height: 25px;
-    margin: 0 auto 6px;
-    background: linear-gradient(var(--color-cyan), transparent);
-}
-
 @media (max-width: 900px) {
     .hero {
         min-height: 700px;

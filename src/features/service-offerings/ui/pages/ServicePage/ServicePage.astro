@@ -7,6 +7,7 @@ import BaseLayout from '../../../../../layouts/BaseLayout.astro';
 import ActionLink from '../../../../../components/atoms/Action/ActionLink.astro';
 import Eyebrow from '../../../../../components/atoms/Eyebrow/Eyebrow.astro';
 import ContactSection from '../../../../../components/organisms/ContactSection/ContactSection.astro';
+import ContactDetailsSection from '../../../../../components/organisms/ContactDetailsSection/ContactDetailsSection.astro';
 import SiteFooter from '../../../../../components/organisms/SiteFooter/SiteFooter.astro';
 import SiteHeader from '../../../../../components/organisms/SiteHeader/SiteHeader.astro';
 import type { ServiceId } from '../../../enums/service-id.enum';
@@ -187,10 +188,8 @@ const structuredData = [
                 </div>
             </section>
         </article>
-        <ContactSection
-            content={content.contact}
-            exploreHref={`${root}#services`}
-        />
+        <ContactSection content={content.contact} />
+        <ContactDetailsSection content={content.contact.details} />
     </main>
     <SiteFooter
         locale={content.locale}

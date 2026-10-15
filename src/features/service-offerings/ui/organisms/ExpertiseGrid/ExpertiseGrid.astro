@@ -16,7 +16,6 @@ const { content } = Astro.props;
             <h2 id="directions-title">
                 {content.expertise} <span aria-hidden="true"></span>
             </h2>
-            <p>{content.expertiseIntro}</p>
         </div>
         <div class:list={[styles['direction-grid']]}>
             {content.items.map((service) => (

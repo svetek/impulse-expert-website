@@ -6,6 +6,7 @@ import type { Locale } from '../../../domains/localization/types/locale.type';
 import ActionLink from '../../atoms/Action/ActionLink.astro';
 import ThemeSwitcher from '../../atoms/ThemeSwitcher/ThemeSwitcher.astro';
 import Brand from '../../molecules/Brand/Brand.astro';
+import ContactBar from '../../molecules/ContactBar/ContactBar.astro';
 
 interface Props {
     locale: Locale;
@@ -30,6 +31,10 @@ const getNavigationHref = (href: string) => `${navigationBase}${href}`;
 ---
 
 <header class:list={[styles['site-header']]} id="top" data-site-header>
+    <ContactBar
+        prompt={content.contactPrompt}
+        contactHref={getNavigationHref('#contact')}
+    />
     <div class:list={['shell', styles['nav-wrap']]}>
         <Brand href={`${root}#top`} label={content.homeLabel} name={siteName} />
         <nav class:list={[styles['desktop-nav']]} aria-label={content.navLabel}>

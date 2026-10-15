@@ -17,6 +17,7 @@ export interface SiteContent {
         openMenu: string;
         closeMenu: string;
         homeLabel: string;
+        contactPrompt: string;
         nav: Array<[label: string, href: string]>;
         talk: string;
         switchLanguageLabel: string;
@@ -30,11 +31,9 @@ export interface SiteContent {
         text: string;
         talk: string;
         explore: string;
-        scroll: string;
     };
     services: ServiceOfferingsContent;
     proof: {
-        eyebrow: string;
         title: string;
         metricsLabel: string;
         metricsNote: string;
@@ -48,7 +47,13 @@ export interface SiteContent {
         title: string;
         text: string;
         talk: string;
-        explore: string;
+        details: {
+            title: string;
+            text: string;
+            phoneLabel: string;
+            addressLabel: string;
+            mapLabel: string;
+        };
     };
     footer: {
         text: string;

@@ -35,6 +35,10 @@
     text-align: center;
 }
 
+.metrics-note:last-child {
+    margin-bottom: 0;
+}
+
 .metrics div {
     padding: 25px 10px;
     border-right: 1px solid var(--color-line);

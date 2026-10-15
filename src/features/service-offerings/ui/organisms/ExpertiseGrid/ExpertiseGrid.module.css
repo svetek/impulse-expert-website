@@ -35,7 +35,6 @@
 .directions-head {
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
     gap: 30px;
     margin-bottom: 20px;
 }
@@ -55,12 +54,6 @@
     height: 2px;
     background: var(--color-cyan);
     box-shadow: 0 0 10px rgba(33, 200, 255, 0.6);
-}
-
-.directions-head p {
-    margin: 0;
-    color: var(--color-text-faint);
-    font-size: 0.74rem;
 }
 
 .direction-grid {
@@ -125,11 +118,6 @@
 
     .directions-head {
         display: block;
-    }
-
-    .directions-head p {
-        margin-top: 11px;
-        font-size: 0.7rem;
     }
 
     .direction-grid {
