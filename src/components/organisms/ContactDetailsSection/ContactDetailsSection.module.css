@@ -57,12 +57,21 @@
 .contact-card:not(.communication-card):focus-visible {
     transform: translateY(-3px);
     border-color: var(--color-cyan);
-    box-shadow: 0 22px 62px var(--shadow-elevated);
+    background:
+        linear-gradient(
+            color-mix(in srgb, var(--color-cyan) 14%, transparent),
+            color-mix(in srgb, var(--color-cyan) 14%, transparent)
+        ),
+        linear-gradient(145deg, var(--color-card-start), var(--color-card-end));
+    box-shadow:
+        inset 3px 0 0 var(--color-cyan),
+        0 22px 62px var(--shadow-elevated);
 }
 
 .communication-card {
     display: flex;
     padding-block: 18px;
+    align-items: stretch;
     flex-direction: column;
     justify-content: center;
 }
@@ -70,6 +79,7 @@
 .contact-method {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
+    margin-inline: -12px;
     padding: 16px 12px;
     align-items: center;
     gap: 22px;
@@ -108,7 +118,9 @@
 }
 
 .contact-method:hover .icon,
-.contact-method:focus-visible .icon {
+.contact-method:focus-visible .icon,
+.contact-card:not(.communication-card):hover .icon,
+.contact-card:not(.communication-card):focus-visible .icon {
     border-color: var(--color-cyan);
     background: var(--color-cyan);
     box-shadow: 0 0 20px color-mix(in srgb, var(--color-cyan) 35%, transparent);
@@ -155,14 +167,15 @@
 .arrow {
     color: var(--color-cyan);
     font-size: 1.35rem;
-    transition: transform 0.2s;
+    opacity: 0.72;
+    transition: opacity 0.2s;
 }
 
 .contact-card:not(.communication-card):hover .arrow,
 .contact-card:not(.communication-card):focus-visible .arrow,
 .contact-method:hover .arrow,
 .contact-method:focus-visible .arrow {
-    transform: translate(2px, -2px);
+    opacity: 1;
 }
 
 @media (max-width: 1000px) {
