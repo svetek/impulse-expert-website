@@ -83,7 +83,10 @@ The Cloudflare token needs permission to edit Workers Scripts. Set the analytics
 
 For production Google Analytics, create the repository variable
 `PUBLIC_GOOGLE_ANALYTICS_ID` under **Settings → Secrets and variables → Actions → Variables**. The workflow exposes it only while Astro builds the static site, so no analytics ID is hardcoded in the source. Keep GA4 Enhanced Measurement enabled for page loads and browser-history page changes so Astro client-side navigation is recorded without duplicate manual page-view events.
+
 Production deployment intentionally fails when this variable is missing or is not a valid `G-...` identifier.
+
+After deployment, accept analytics consent on the site and confirm that requests to `googletagmanager.com/gtag/js` and Google Analytics `collect` appear in the browser Network panel.
 
 Cloudflare reads `public/_headers` from the generated assets. Security headers apply to the whole site, while hashed Astro assets use a one-year immutable browser cache.
 
