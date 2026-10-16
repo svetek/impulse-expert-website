@@ -1,0 +1,25 @@
+---
+import { defaultLocale } from '../../domains/localization/config/locale.config';
+import { content } from '../../domains/localization/data/content';
+import type { ServiceId } from '../../features/service-offerings/enums/service-id.enum';
+import {
+    serviceIds,
+    serviceSlugById,
+} from '../../features/service-offerings/config/service-route.config';
+import ServicePage from '../../features/service-offerings/ui/pages/ServicePage/ServicePage.astro';
+
+interface Props {
+    serviceId: ServiceId;
+}
+
+export function getStaticPaths() {
+    return serviceIds.map((serviceId) => ({
+        params: { service: serviceSlugById[serviceId] },
+        props: { serviceId },
+    }));
+}
+
+const { serviceId } = Astro.props;
+---
+
+<ServicePage content={content[defaultLocale]} {serviceId} />

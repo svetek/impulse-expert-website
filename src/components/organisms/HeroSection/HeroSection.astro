@@ -1,0 +1,46 @@
+---
+import styles from './HeroSection.module.css';
+import heroImage from '../../../assets/images/hero-datacenter.png';
+import heroLightImage from '../../../assets/images/hero-datacenter-light.png';
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+import ActionLink from '../../atoms/Action/ActionLink.astro';
+import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+import ThemeImage from '../../atoms/ThemeImage/ThemeImage.astro';
+
+interface Props {
+    content: SiteContent['hero'];
+}
+
+const { content } = Astro.props;
+---
+
+<section class:list={[styles['hero']]} aria-labelledby="hero-title">
+    <div class:list={[styles['hero-image']]} aria-hidden="true">
+        <ThemeImage
+            class={styles['hero-background']}
+            darkSrc={heroImage}
+            lightSrc={heroLightImage}
+            desktopWidth={2048}
+            mobileWidth={960}
+            eager
+        />
+    </div>
+    <div class:list={[styles['hero-grid']]} aria-hidden="true"></div>
+    <div class:list={['shell', styles['hero-content']]}>
+        <Eyebrow>{content.eyebrow}</Eyebrow>
+        <h1 id="hero-title">
+            {content.title}
+            <br />
+            <span>{content.accent}</span>
+        </h1>
+        <p class:list={[styles['hero-lede']]}>{content.text}</p>
+        <div class:list={[styles['hero-actions']]}>
+            <ActionLink href="#contact">
+                {content.talk} <span aria-hidden="true">→</span>
+            </ActionLink>
+            <ActionLink variant="ghost" href="#services">
+                {content.explore}
+            </ActionLink>
+        </div>
+    </div>
+</section>

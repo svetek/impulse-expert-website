@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import styles from './Action.module.css';
+
+type Props = HTMLAttributes<'button'> & {
+    variant?: 'primary' | 'ghost';
+    size?: 'default' | 'small' | 'large';
+};
+
+const {
+    variant = 'primary',
+    size = 'default',
+    class: className,
+    type = 'button',
+    ...attributes
+} = Astro.props;
+---
+
+<button
+    {...attributes}
+    {type}
+    class:list={[
+        styles['action'],
+        {
+            [styles['ghost']]: variant === 'ghost',
+            [styles['small']]: size === 'small',
+            [styles['large']]: size === 'large',
+        },
+        className,
+    ]}
+>
+    <slot />
+</button>

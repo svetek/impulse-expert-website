@@ -1,0 +1,29 @@
+.visual {
+    overflow: hidden;
+}
+
+.image {
+    --theme-image-position: center;
+    --theme-image-size: contain;
+
+    -webkit-mask-image: radial-gradient(
+        ellipse 52% 48% at 48% 50%,
+        #000 50%,
+        rgba(0, 0, 0, 0.9) 63%,
+        rgba(0, 0, 0, 0.5) 76%,
+        transparent 100%
+    );
+    mask-image: radial-gradient(
+        ellipse 52% 48% at 48% 50%,
+        #000 50%,
+        rgba(0, 0, 0, 0.9) 63%,
+        rgba(0, 0, 0, 0.5) 76%,
+        transparent 100%
+    );
+}
+
+@media (max-width: 560px) {
+    .visual {
+        min-height: 210px;
+    }
+}

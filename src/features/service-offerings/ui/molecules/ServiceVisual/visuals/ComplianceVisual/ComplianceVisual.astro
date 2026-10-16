@@ -1,0 +1,33 @@
+---
+import type { ServiceOfferingsContent } from '../../../../../interfaces/service-content.interface';
+import ServiceVisualFrame from '../../ServiceVisualFrame.astro';
+import styles from './ComplianceVisual.module.css';
+
+interface Props {
+    label: string;
+    badges: ServiceOfferingsContent['complianceBadges'];
+    alternate?: boolean;
+}
+
+const { label, badges, alternate = false } = Astro.props;
+---
+
+<ServiceVisualFrame class={styles['visual']} {alternate} {label} role="img">
+    <div class:list={[styles['badge']]}>
+        <strong>ISO</strong>
+        <span>27001</span>
+        <small>{badges.aligned}</small>
+    </div>
+    <div class:list={[styles['shield']]}>
+        <svg viewBox="0 0 80 94" aria-hidden="true">
+            <path d="M40 3 72 15v27c0 23-14 39-32 49C22 81 8 65 8 42V15Z" />
+            <rect x="27" y="42" width="26" height="23" rx="4" />
+            <path d="M33 42v-7a7 7 0 0 1 14 0v7" />
+        </svg>
+    </div>
+    <div class:list={[styles['badge']]}>
+        <strong>SOC 2</strong>
+        <span>{badges.ready}</span>
+        <small>{badges.controls}</small>
+    </div>
+</ServiceVisualFrame>

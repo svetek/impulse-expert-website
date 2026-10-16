@@ -1,0 +1,13 @@
+---
+import styles from './Eyebrow.module.css';
+
+interface Props {
+    tone?: 'default' | 'accent';
+}
+
+const { tone = 'default' } = Astro.props;
+---
+
+<p class:list={[styles['eyebrow'], { [styles['accent']]: tone === 'accent' }]}>
+    <slot />
+</p>

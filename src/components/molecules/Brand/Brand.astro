@@ -1,0 +1,57 @@
+---
+interface Props {
+    href: string;
+    label: string;
+    name: string;
+}
+
+const { href, label, name } = Astro.props;
+const [primaryName, ...secondaryNameParts] = name.split(' ');
+const secondaryName = secondaryNameParts.join(' ');
+---
+
+<a class="brand" href={href} aria-label={label}>
+    <svg class="brand-mark" viewBox="0 0 56 42" aria-hidden="true">
+        <path d="M1 35 21 1h12L13 35Z"></path>
+        <path d="m24 35 14-24 17 24H42l-10-16-9 16Z"></path>
+    </svg>
+    <span class="brand-copy">
+        <strong>{primaryName}</strong>
+        {secondaryName && <small>{secondaryName}</small>}
+    </span>
+</a>
+
+<style>
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        flex: none;
+    }
+
+    .brand-mark {
+        width: 39px;
+        fill: var(--color-cyan);
+        filter: drop-shadow(0 0 12px rgba(33, 200, 255, 0.2));
+    }
+
+    .brand-copy {
+        display: flex;
+        flex-direction: column;
+        letter-spacing: 0.24em;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    .brand-copy strong {
+        font-size: 0.9rem;
+    }
+
+    .brand-copy small {
+        margin-top: 7px;
+        color: var(--color-cyan);
+        font-size: 0.61rem;
+        font-weight: 800;
+        letter-spacing: 0.52em;
+    }
+</style>

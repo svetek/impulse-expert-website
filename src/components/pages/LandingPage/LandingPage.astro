@@ -1,0 +1,45 @@
+---
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+import ContactSection from '../../organisms/ContactSection/ContactSection.astro';
+import ContactDetailsSection from '../../organisms/ContactDetailsSection/ContactDetailsSection.astro';
+import HeroSection from '../../organisms/HeroSection/HeroSection.astro';
+import ProofSection from '../../organisms/ProofSection/ProofSection.astro';
+import ServicesSection from '../../../features/service-offerings/ui/organisms/ServicesSection/ServicesSection.astro';
+import SiteFooter from '../../organisms/SiteFooter/SiteFooter.astro';
+import SiteHeader from '../../organisms/SiteHeader/SiteHeader.astro';
+import LandingTemplate from '../../templates/LandingTemplate/LandingTemplate.astro';
+
+interface Props {
+    content: SiteContent;
+}
+
+const { content } = Astro.props;
+---
+
+<LandingTemplate
+    layout={{
+        locale: content.locale,
+        siteName: content.siteName,
+        seo: content.seo,
+        analytics: content.analytics,
+    }}
+    skipToContentLabel={content.accessibility.skipToContent}
+>
+    <SiteHeader
+        slot="header"
+        locale={content.locale}
+        siteName={content.siteName}
+        content={content.header}
+    />
+    <HeroSection content={content.hero} />
+    <ServicesSection content={content.services} locale={content.locale} />
+    <ProofSection content={content.proof} />
+    <ContactSection content={content.contact} />
+    <ContactDetailsSection content={content.contact.details} />
+    <SiteFooter
+        slot="footer"
+        locale={content.locale}
+        siteName={content.siteName}
+        content={content.footer}
+    />
+</LandingTemplate>

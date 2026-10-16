@@ -1,0 +1,64 @@
+.frame {
+    position: relative;
+    min-height: 385px;
+    height: 100%;
+}
+
+.alternate {
+    order: 1;
+}
+
+.frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(90deg, var(--color-bg), transparent 22%),
+        linear-gradient(
+            0deg,
+            var(--color-bg),
+            transparent 18%,
+            transparent 82%,
+            var(--color-bg)
+        );
+    pointer-events: none;
+}
+
+.alternate::after {
+    background:
+        linear-gradient(270deg, var(--color-bg), transparent 22%),
+        linear-gradient(
+            0deg,
+            var(--color-bg),
+            transparent 18%,
+            transparent 82%,
+            var(--color-bg)
+        );
+}
+
+@media (max-width: 900px) {
+    .frame,
+    .alternate {
+        order: 2;
+        min-height: 340px;
+    }
+
+    .frame::after,
+    .alternate::after {
+        background: linear-gradient(
+            0deg,
+            var(--color-bg),
+            transparent 18%,
+            transparent 80%,
+            var(--color-bg)
+        );
+    }
+}
+
+@media (max-width: 560px) {
+    .frame,
+    .alternate {
+        min-height: 280px;
+    }
+}

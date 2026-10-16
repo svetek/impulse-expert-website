@@ -1,0 +1,60 @@
+---
+import AnalyticsConsent from '../components/organisms/AnalyticsConsent/AnalyticsConsent.astro';
+import SeoHead from '../components/seo/SeoHead/SeoHead.astro';
+import { ClientRouter } from 'astro:transitions';
+import type { SiteContent } from '../domains/site/interfaces/site-content.interface';
+import type { Locale } from '../domains/localization/types/locale.type';
+import '../styles/fonts.css';
+import '../styles/global.css';
+
+interface Props {
+    locale: SiteContent['locale'];
+    siteName: SiteContent['siteName'];
+    seo: SiteContent['seo'];
+    analytics: SiteContent['analytics'];
+    pageTitle?: string;
+    pageDescription?: string;
+    robots?: string;
+    canonicalPath?: string | null;
+    alternatePaths?: Partial<Record<Locale, string>>;
+    structuredData?: Array<Record<string, unknown>>;
+}
+
+const {
+    locale,
+    siteName,
+    seo,
+    analytics,
+    pageTitle = seo.title,
+    pageDescription = seo.description,
+    robots = 'index, follow, max-image-preview:large',
+    canonicalPath,
+    alternatePaths,
+    structuredData = [],
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale}>
+    <head>
+        <SeoHead
+            {locale}
+            {siteName}
+            {seo}
+            pageTitle={pageTitle}
+            pageDescription={pageDescription}
+            robots={robots}
+            canonicalPath={canonicalPath}
+            alternatePaths={alternatePaths}
+            structuredData={structuredData}
+        />
+        <ClientRouter />
+    </head>
+    <body>
+        <slot />
+        <AnalyticsConsent content={analytics} />
+        <script>
+            import '../scripts/smooth-anchor-scroll';
+        </script>
+    </body>
+</html>

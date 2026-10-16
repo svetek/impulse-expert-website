@@ -1,0 +1,25 @@
+---
+import infrastructureImage from '../../../../../../../assets/images/infra-network.png';
+import infrastructureLightImage from '../../../../../../../assets/images/infra-network-light.png';
+import ThemeImage from '../../../../../../../components/atoms/ThemeImage/ThemeImage.astro';
+import ServiceVisualFrame from '../../ServiceVisualFrame.astro';
+import styles from './InfrastructureVisual.module.css';
+
+interface Props {
+    alt: string;
+    alternate?: boolean;
+}
+
+const { alt, alternate = false } = Astro.props;
+---
+
+<ServiceVisualFrame class={styles['visual']} {alternate}>
+    <ThemeImage
+        class={styles['image']}
+        darkSrc={infrastructureImage}
+        lightSrc={infrastructureLightImage}
+        {alt}
+        desktopWidth={1280}
+        mobileWidth={720}
+    />
+</ServiceVisualFrame>

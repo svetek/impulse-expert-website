@@ -1,0 +1,69 @@
+---
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+import { localeConfig } from '../../../domains/localization/config/locale.config';
+import ActionLink from '../../atoms/Action/ActionLink.astro';
+import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+import Brand from '../../molecules/Brand/Brand.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+interface Props {
+    content: SiteContent;
+}
+
+const { content } = Astro.props;
+const root = localeConfig[content.locale].path;
+---
+
+<BaseLayout
+    locale={content.locale}
+    siteName={content.siteName}
+    seo={content.seo}
+    analytics={content.analytics}
+    pageTitle={content.notFound.title}
+    pageDescription={content.notFound.description}
+    robots="noindex, nofollow"
+    canonicalPath={null}
+>
+    <main class="error-page">
+        <div class="error-brand">
+            <Brand
+                href={root}
+                label={content.header.homeLabel}
+                name={content.siteName}
+            />
+        </div>
+        <Eyebrow tone="accent">404</Eyebrow>
+        <h1>{content.notFound.heading}</h1>
+        <p>{content.notFound.description}</p>
+        <ActionLink href={root}>
+            {content.notFound.action} <span aria-hidden="true">→</span>
+        </ActionLink>
+    </main>
+</BaseLayout>
+
+<style>
+    .error-page {
+        width: min(680px, calc(100% - 40px));
+        min-height: 100vh;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .error-brand {
+        margin-bottom: 70px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: clamp(2.8rem, 8vw, 5.8rem);
+    }
+
+    .error-page > p {
+        margin-bottom: 30px;
+        color: var(--color-muted);
+        font-size: 1.1rem;
+    }
+</style>

@@ -1,0 +1,81 @@
+---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import styles from './ThemeImage.module.css';
+
+interface Props {
+    darkSrc: ImageMetadata;
+    lightSrc: ImageMetadata;
+    alt?: string;
+    class?: string;
+    desktopWidth?: number;
+    mobileWidth?: number;
+    eager?: boolean;
+}
+
+const {
+    darkSrc,
+    lightSrc,
+    alt = '',
+    class: className,
+    desktopWidth = 1920,
+    mobileWidth = 960,
+    eager = false,
+} = Astro.props;
+
+const imageOptions = {
+    format: 'webp' as const,
+    quality: 85,
+};
+const [darkDesktop, darkMobile, lightDesktop, lightMobile] = await Promise.all([
+    getImage({ src: darkSrc, width: desktopWidth, ...imageOptions }),
+    getImage({ src: darkSrc, width: mobileWidth, ...imageOptions }),
+    getImage({ src: lightSrc, width: desktopWidth, ...imageOptions }),
+    getImage({ src: lightSrc, width: mobileWidth, ...imageOptions }),
+]);
+const backgroundImages = [
+    `--theme-image-dark: url('${darkDesktop.src}')`,
+    `--theme-image-dark-mobile: url('${darkMobile.src}')`,
+    `--theme-image-light: url('${lightDesktop.src}')`,
+    `--theme-image-light-mobile: url('${lightMobile.src}')`,
+].join('; ');
+---
+
+<div
+    class:list={[styles['image'], className]}
+    style={backgroundImages}
+    data-theme-image
+    data-loaded={eager ? '' : undefined}
+    role={alt ? 'img' : undefined}
+    aria-label={alt || undefined}
+    aria-hidden={alt ? undefined : 'true'}
+></div>
+
+<script>
+    let themeImageObserver: IntersectionObserver | undefined;
+
+    const initializeThemeImages = () => {
+        themeImageObserver?.disconnect();
+        const images = document.querySelectorAll<HTMLElement>(
+            '[data-theme-image]:not([data-loaded])',
+        );
+
+        if ('IntersectionObserver' in window) {
+            themeImageObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) return;
+                        entry.target.setAttribute('data-loaded', '');
+                        themeImageObserver?.unobserve(entry.target);
+                    });
+                },
+                { rootMargin: '250px' },
+            );
+            images.forEach((image) => themeImageObserver?.observe(image));
+        } else {
+            images.forEach((image) => image.setAttribute('data-loaded', ''));
+        }
+    };
+
+    document.addEventListener('astro:page-load', initializeThemeImages);
+</script>

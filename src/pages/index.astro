@@ -1,0 +1,7 @@
+---
+import LandingPage from '../components/pages/LandingPage/LandingPage.astro';
+import { defaultLocale } from '../domains/localization/config/locale.config';
+import { content } from '../domains/localization/data/content';
+---
+
+<LandingPage content={content[defaultLocale]} />

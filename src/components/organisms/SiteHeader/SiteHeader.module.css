@@ -1,0 +1,123 @@
+.site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 20;
+    background: linear-gradient(
+        180deg,
+        var(--color-header-start),
+        var(--color-header-middle),
+        transparent
+    );
+    backdrop-filter: blur(4px);
+    transition:
+        background 0.2s,
+        box-shadow 0.2s;
+}
+
+.site-header:global(.scrolled) {
+    background: var(--color-header-scrolled);
+    box-shadow: 0 12px 30px var(--shadow-header);
+}
+
+.nav-wrap {
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    gap: 42px;
+}
+
+.desktop-nav,
+.mobile-nav,
+.locale-switch,
+.header-cta,
+.menu-button {
+    font-family: var(--font-heading);
+    letter-spacing: 0.055em;
+}
+
+.desktop-nav {
+    display: flex;
+    gap: 30px;
+    margin-left: auto;
+    font-weight: 600;
+}
+
+.desktop-nav a {
+    color: var(--color-text-soft);
+    font-size: 0.78rem;
+    transition: color 0.2s;
+}
+
+.desktop-nav a:hover {
+    color: var(--color-text);
+}
+
+.locale-switch {
+    flex: none;
+    padding: 7px 9px;
+    border: 1px solid var(--color-control-border);
+    border-radius: 4px;
+    color: var(--color-cyan);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.locale-switch:hover {
+    border-color: var(--color-cyan);
+}
+
+.menu-button {
+    display: none;
+    padding: 8px;
+    border: 0;
+    background: none;
+    color: var(--color-text);
+}
+
+.menu-button span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    margin: 6px;
+    background: currentColor;
+}
+
+.mobile-nav {
+    display: none;
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .nav-wrap {
+        gap: 12px;
+    }
+
+    .desktop-nav,
+    .header-cta {
+        display: none;
+    }
+
+    .locale-switch {
+        margin-left: auto;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .mobile-nav {
+        padding: 8px 24px 22px;
+        background: var(--color-mobile-nav);
+        border-bottom: 1px solid var(--color-line);
+    }
+
+    .mobile-nav:global(.open) {
+        display: grid;
+    }
+
+    .mobile-nav a {
+        padding: 13px;
+        border-bottom: 1px solid var(--color-line);
+    }
+}

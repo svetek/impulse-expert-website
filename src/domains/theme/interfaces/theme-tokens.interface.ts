@@ -1,0 +1,34 @@
+export interface ThemeTokens {
+    '--color-bg': string;
+    '--color-bg-soft': string;
+    '--color-panel': string;
+    '--color-line': string;
+    '--color-text': string;
+    '--color-muted': string;
+    '--color-text-soft': string;
+    '--color-text-faint': string;
+    '--color-cyan': string;
+    '--color-blue': string;
+    '--color-on-accent': string;
+    '--color-action-text': string;
+    '--color-control-bg': string;
+    '--color-control-border': string;
+    '--color-header-start': string;
+    '--color-header-middle': string;
+    '--color-header-scrolled': string;
+    '--color-mobile-nav': string;
+    '--color-footer': string;
+    '--color-section-start': string;
+    '--color-section-end': string;
+    '--color-card-start': string;
+    '--color-card-end': string;
+    '--color-panel-start': string;
+    '--color-panel-end': string;
+    '--color-hero-solid': string;
+    '--color-hero-strong': string;
+    '--color-hero-soft': string;
+    '--color-hero-faint': string;
+    '--color-grid-line': string;
+    '--shadow-header': string;
+    '--shadow-elevated': string;
+}

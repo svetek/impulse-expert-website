@@ -1,0 +1,33 @@
+---
+import styles from './ContactSection.module.css';
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+import ActionLink from '../../atoms/Action/ActionLink.astro';
+import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+
+interface Props {
+    content: SiteContent['contact'];
+    contactHref?: string;
+}
+
+const { content, contactHref = '#contact' } = Astro.props;
+---
+
+<section
+    class:list={[styles['cta']]}
+    id="contact-cta"
+    aria-labelledby="contact-cta-title"
+>
+    <div class:list={[styles['cta-grid']]} aria-hidden="true"></div>
+    <div class:list={['shell', styles['cta-inner']]}>
+        <div>
+            <Eyebrow tone="accent">{content.eyebrow}</Eyebrow>
+            <h2 id="contact-cta-title">{content.title}</h2>
+            <p>{content.text}</p>
+        </div>
+        <div class:list={[styles['cta-actions']]}>
+            <ActionLink size="large" href={contactHref}>
+                {content.talk} <span aria-hidden="true">→</span>
+            </ActionLink>
+        </div>
+    </div>
+</section>
