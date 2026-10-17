@@ -1,5 +1,6 @@
 ---
 import styles from './AnalyticsConsent.module.css';
+import { analyticsConfig } from '../../../domains/analytics/config/analytics.config';
 import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
 import ActionButton from '../../atoms/Action/ActionButton.astro';
 
@@ -8,15 +9,11 @@ interface Props {
 }
 
 const { content } = Astro.props;
-const rawGoogleAnalyticsId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID?.trim();
-const rawYandexMetrikaId = import.meta.env.PUBLIC_YANDEX_METRIKA_ID?.trim();
-const googleAnalyticsId = /^G-[A-Z0-9]+$/.test(rawGoogleAnalyticsId ?? '')
-    ? rawGoogleAnalyticsId
-    : undefined;
-const yandexMetrikaId = /^[1-9]\d*$/.test(rawYandexMetrikaId ?? '')
-    ? rawYandexMetrikaId
-    : undefined;
-const analyticsEnabled = Boolean(googleAnalyticsId || yandexMetrikaId);
+const {
+    googleAnalyticsId,
+    yandexMetrikaId,
+    enabled: analyticsEnabled,
+} = analyticsConfig;
 ---
 
 {analyticsEnabled && (
@@ -127,6 +124,9 @@ const analyticsEnabled = Boolean(googleAnalyticsId || yandexMetrikaId);
             state.controller = new AbortController();
             const { signal } = state.controller;
             const banner = document.querySelector('[data-analytics-consent]');
+            const preferencesButton = document.querySelector(
+                '[data-analytics-preferences]',
+            );
             const savedConsent = readConsent();
 
             if (savedConsent === 'accepted') loadAnalytics();
@@ -144,8 +144,19 @@ const analyticsEnabled = Boolean(googleAnalyticsId || yandexMetrikaId);
             banner?.querySelector('[data-analytics-decline]')?.addEventListener(
                 'click',
                 () => {
+                    const analyticsWasLoaded = state.loaded;
                     saveConsent('declined');
                     banner.hidden = true;
+                    if (analyticsWasLoaded) window.location.reload();
+                },
+                { signal },
+            );
+            preferencesButton?.addEventListener(
+                'click',
+                () => {
+                    if (!banner) return;
+                    banner.hidden = false;
+                    banner.querySelector('[data-analytics-accept]')?.focus();
                 },
                 { signal },
             );

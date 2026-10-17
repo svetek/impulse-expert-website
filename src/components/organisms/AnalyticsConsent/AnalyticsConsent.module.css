@@ -29,11 +29,18 @@
 }
 
 .consent-decline {
-    padding: 9px 4px;
-    border: 0;
-    background: none;
-    color: var(--color-muted);
+    padding: 9px 14px;
+    border: 1px solid var(--color-control-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-control-bg);
+    color: var(--color-text-soft);
     cursor: pointer;
+}
+
+.consent-decline:hover,
+.consent-decline:focus-visible {
+    border-color: var(--color-cyan);
+    color: var(--color-text);
 }
 
 @media (max-width: 560px) {

@@ -15,9 +15,32 @@ footer {
     color: var(--color-muted);
 }
 
-.footer-inner > small {
+.footer-meta {
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.footer-meta small {
     color: var(--color-text-faint);
+}
+
+.analytics-preferences {
+    padding: 4px 0;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    background: none;
+    color: var(--color-muted);
+    font: inherit;
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+
+.analytics-preferences:hover,
+.analytics-preferences:focus-visible {
+    border-bottom-color: var(--color-cyan);
+    color: var(--color-text);
 }
 
 @media (max-width: 900px) {
@@ -26,9 +49,10 @@ footer {
         flex-wrap: wrap;
     }
 
-    .footer-inner > small {
+    .footer-meta {
         width: 100%;
         margin: 0;
+        justify-content: space-between;
     }
 }
 

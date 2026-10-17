@@ -282,10 +282,10 @@ export const en = {
         homeLabel: 'Impulse Expert home',
     },
     analytics: {
-        notice: 'We use Google Analytics and Yandex Metrica to understand how the site is used. Analytics starts only with your consent.',
-        accept: 'Accept analytics',
+        notice: 'We use cookies to improve the site. Only with your consent.',
+        accept: 'Accept cookies',
         decline: 'Decline',
-        preferencesLabel: 'Analytics preferences',
+        preferencesLabel: 'Cookie settings',
     },
     accessibility: {
         skipToContent: 'Skip to content',

@@ -282,10 +282,10 @@ export const ru = {
         homeLabel: 'Главная Impulse Expert',
     },
     analytics: {
-        notice: 'Мы используем Google Analytics и Яндекс Метрику, чтобы понимать, как используется сайт. Счётчики запускаются только с вашего согласия.',
-        accept: 'Разрешить аналитику',
+        notice: 'Мы используем cookie, чтобы улучшать сайт. Только с вашего согласия.',
+        accept: 'Разрешить cookie',
         decline: 'Отклонить',
-        preferencesLabel: 'Настройки аналитики',
+        preferencesLabel: 'Настройки cookie',
     },
     accessibility: {
         skipToContent: 'Перейти к содержимому',

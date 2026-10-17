@@ -1,5 +1,6 @@
 ---
 import styles from './SiteFooter.module.css';
+import { analyticsConfig } from '../../../domains/analytics/config/analytics.config';
 import { localeConfig } from '../../../domains/localization/config/locale.config';
 import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
 import type { Locale } from '../../../domains/localization/types/locale.type';
@@ -9,9 +10,10 @@ interface Props {
     locale: Locale;
     siteName: string;
     content: SiteContent['footer'];
+    analyticsPreferencesLabel: SiteContent['analytics']['preferencesLabel'];
 }
 
-const { locale, siteName, content } = Astro.props;
+const { locale, siteName, content, analyticsPreferencesLabel } = Astro.props;
 const root = localeConfig[locale].path;
 const currentYear = new Date().getFullYear();
 ---
@@ -20,8 +22,19 @@ const currentYear = new Date().getFullYear();
     <div class:list={['shell', styles['footer-inner']]}>
         <Brand href={`${root}#top`} label={content.homeLabel} name={siteName} />
         <p>{content.text}</p>
-        <small>
-            © {currentYear} {siteName}
-        </small>
+        <div class:list={[styles['footer-meta']]}>
+            {analyticsConfig.enabled && (
+                <button
+                    type="button"
+                    class:list={[styles['analytics-preferences']]}
+                    data-analytics-preferences
+                >
+                    {analyticsPreferencesLabel}
+                </button>
+            )}
+            <small>
+                © {currentYear} {siteName}
+            </small>
+        </div>
     </div>
 </footer>
