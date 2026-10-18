@@ -1,0 +1,45 @@
+---
+import { getImage } from 'astro:assets';
+import heroImage from '../../../assets/images/hero-datacenter.png';
+import heroLightImage from '../../../assets/images/hero-datacenter-light.png';
+
+const imageOptions = {
+    format: 'webp' as const,
+    quality: 85,
+};
+const [darkDesktop, darkMobile, lightDesktop, lightMobile] = await Promise.all([
+    getImage({ src: heroImage, width: 2048, ...imageOptions }),
+    getImage({ src: heroImage, width: 960, ...imageOptions }),
+    getImage({ src: heroLightImage, width: 2048, ...imageOptions }),
+    getImage({ src: heroLightImage, width: 960, ...imageOptions }),
+]);
+const preloads = [
+    {
+        href: darkDesktop.src,
+        media: '(min-width: 901px) and (prefers-color-scheme: dark)',
+    },
+    {
+        href: darkMobile.src,
+        media: '(max-width: 900px) and (prefers-color-scheme: dark)',
+    },
+    {
+        href: lightDesktop.src,
+        media: '(min-width: 901px) and (prefers-color-scheme: light)',
+    },
+    {
+        href: lightMobile.src,
+        media: '(max-width: 900px) and (prefers-color-scheme: light)',
+    },
+];
+---
+
+{preloads.map(({ href, media }) => (
+    <link
+        rel="preload"
+        as="image"
+        type="image/webp"
+        href={href}
+        media={media}
+        fetchpriority="high"
+    />
+))}

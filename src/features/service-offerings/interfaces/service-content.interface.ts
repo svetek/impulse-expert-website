@@ -6,6 +6,10 @@ export interface ServiceContent {
     kicker: string;
     title: string;
     text: string;
+    seoTitle: string;
+    seoDescription: string;
+    audience: string;
+    engagements: string[];
     items: string[];
     scenario: {
         title: string;
@@ -33,8 +37,8 @@ export interface ServiceOfferingsContent {
         breadcrumbHome: string;
         breadcrumbServices: string;
         capabilitiesTitle: string;
-        approachTitle: string;
-        approachText: string;
+        audienceTitle: string;
+        engagementsTitle: string;
         otherServicesTitle: string;
         discussProject: string;
         scenarioEyebrow: string;

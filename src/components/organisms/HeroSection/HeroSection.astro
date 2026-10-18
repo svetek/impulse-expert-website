@@ -35,10 +35,19 @@ const { content } = Astro.props;
         </h1>
         <p class:list={[styles['hero-lede']]}>{content.text}</p>
         <div class:list={[styles['hero-actions']]}>
-            <ActionLink href="#contact">
+            <ActionLink
+                href="#contact"
+                data-analytics-event="cta_click"
+                data-analytics-label="hero_contact"
+            >
                 {content.talk} <span aria-hidden="true">→</span>
             </ActionLink>
-            <ActionLink variant="ghost" href="#services">
+            <ActionLink
+                variant="ghost"
+                href="#services"
+                data-analytics-event="cta_click"
+                data-analytics-label="hero_services"
+            >
                 {content.explore}
             </ActionLink>
         </div>

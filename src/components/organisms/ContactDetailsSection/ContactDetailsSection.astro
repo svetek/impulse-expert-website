@@ -30,7 +30,12 @@ const { email } = siteConfig;
                     styles['communication-card'],
                 ]}
             >
-                <a class:list={[styles['contact-method']]} href={phone.href}>
+                <a
+                    class:list={[styles['contact-method']]}
+                    href={phone.href}
+                    data-analytics-event="generate_lead"
+                    data-analytics-label="phone"
+                >
                     <span class:list={[styles['icon']]} aria-hidden="true">
                         <svg viewBox="0 0 24 24">
                             <path d="M6.6 3.5 9 8.2 7.3 9.9a15.7 15.7 0 0 0 6.8 6.8l1.7-1.7 4.7 2.4v2.1a2 2 0 0 1-2 2A16 16 0 0 1 2.5 5.5a2 2 0 0 1 2-2Z"></path>
@@ -48,6 +53,8 @@ const { email } = siteConfig;
                 <a
                     class:list={[styles['contact-method']]}
                     href={`mailto:${email}`}
+                    data-analytics-event="generate_lead"
+                    data-analytics-label="email"
                 >
                     <span class:list={[styles['icon']]} aria-hidden="true">
                         <svg viewBox="0 0 24 24">
@@ -76,6 +83,8 @@ const { email } = siteConfig;
                 href={address.mapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-analytics-event="contact_click"
+                data-analytics-label="map"
             >
                 <span class:list={[styles['icon']]} aria-hidden="true">
                     <svg viewBox="0 0 24 24">

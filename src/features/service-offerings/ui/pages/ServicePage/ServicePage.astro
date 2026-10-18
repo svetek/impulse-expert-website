@@ -42,7 +42,7 @@ const site = Astro.site ?? new URL(siteConfig.fallbackUrl);
 const pageUrl = new URL(currentPath, site).href;
 const organizationId = new URL('/#organization', site).href;
 const websiteId = new URL('/#website', site).href;
-const pageTitle = `${service.title} — ${content.siteName}`;
+const pageTitle = service.seoTitle;
 const relatedServices = content.services.items.filter(
     ({ id }) => id !== serviceId,
 );
@@ -52,7 +52,7 @@ const structuredData = [
         '@id': `${pageUrl}#webpage`,
         url: pageUrl,
         name: pageTitle,
-        description: service.text,
+        description: service.seoDescription,
         inLanguage: locale,
         isPartOf: { '@id': websiteId },
         about: { '@id': `${pageUrl}#service` },
@@ -62,7 +62,7 @@ const structuredData = [
         '@id': `${pageUrl}#service`,
         name: service.title,
         serviceType: service.short,
-        description: service.text,
+        description: service.seoDescription,
         url: pageUrl,
         provider: { '@id': organizationId },
     },
@@ -98,7 +98,7 @@ const structuredData = [
     seo={content.seo}
     analytics={content.analytics}
     {pageTitle}
-    pageDescription={service.text}
+    pageDescription={service.seoDescription}
     canonicalPath={currentPath}
     alternatePaths={alternatePaths}
     {structuredData}
@@ -135,7 +135,11 @@ const structuredData = [
                     <Eyebrow tone="accent">{service.kicker}</Eyebrow>
                     <h1>{service.title}</h1>
                     <p>{service.text}</p>
-                    <ActionLink href="#contact">
+                    <ActionLink
+                        href="#contact"
+                        data-analytics-event="cta_click"
+                        data-analytics-label={`service_${service.id}`}
+                    >
                         {content.services.page.discussProject}
                         <span aria-hidden="true">→</span>
                     </ActionLink>
@@ -160,8 +164,16 @@ const structuredData = [
                     </ul>
                 </div>
                 <div>
-                    <h2>{content.services.page.approachTitle}</h2>
-                    <p>{content.services.page.approachText}</p>
+                    <h2>{content.services.page.audienceTitle}</h2>
+                    <p>{service.audience}</p>
+                </div>
+                <div class:list={[styles['engagements']]}>
+                    <h2>{content.services.page.engagementsTitle}</h2>
+                    <ul>
+                        {service.engagements.map((engagement) => (
+                            <li>{engagement}</li>
+                        ))}
+                    </ul>
                 </div>
             </section>
 

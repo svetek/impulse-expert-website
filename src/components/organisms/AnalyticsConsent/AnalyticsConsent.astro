@@ -160,6 +160,40 @@ const {
                 },
                 { signal },
             );
+            document.addEventListener(
+                'click',
+                (event) => {
+                    if (!(event.target instanceof Element)) return;
+                    const target = event.target.closest(
+                        '[data-analytics-event]',
+                    );
+                    if (!target || readConsent() !== 'accepted') return;
+
+                    const eventName = target.getAttribute(
+                        'data-analytics-event',
+                    );
+                    const eventLabel = target.getAttribute(
+                        'data-analytics-label',
+                    );
+                    if (!eventName) return;
+
+                    const parameters = eventLabel
+                        ? { event_label: eventLabel }
+                        : {};
+                    if (googleAnalyticsId && window.gtag) {
+                        window.gtag('event', eventName, parameters);
+                    }
+                    if (yandexMetrikaId && window.ym) {
+                        window.ym(
+                            Number(yandexMetrikaId),
+                            'reachGoal',
+                            eventName,
+                            parameters,
+                        );
+                    }
+                },
+                { signal },
+            );
         };
 
         if (state.initialized) return;

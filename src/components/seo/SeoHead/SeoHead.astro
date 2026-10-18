@@ -63,8 +63,16 @@ const organizationSchema = {
     '@id': new URL('/#organization', site).href,
     name: siteName,
     url: new URL('/', site).href,
+    logo: new URL('/favicon.svg', site).href,
     email: siteConfig.email,
     telephone: siteConfig.contact.phone.display,
+    contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        email: siteConfig.email,
+        telephone: siteConfig.contact.phone.display,
+        availableLanguage: ['English', 'Russian'],
+    },
     address: {
         '@type': 'PostalAddress',
         streetAddress: siteConfig.contact.address.streetAddress,

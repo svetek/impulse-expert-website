@@ -2,6 +2,7 @@
 import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
 import ContactSection from '../../organisms/ContactSection/ContactSection.astro';
 import ContactDetailsSection from '../../organisms/ContactDetailsSection/ContactDetailsSection.astro';
+import AboutSection from '../../organisms/AboutSection/AboutSection.astro';
 import HeroSection from '../../organisms/HeroSection/HeroSection.astro';
 import ProofSection from '../../organisms/ProofSection/ProofSection.astro';
 import ServicesSection from '../../../features/service-offerings/ui/organisms/ServicesSection/ServicesSection.astro';
@@ -34,6 +35,7 @@ const { content } = Astro.props;
     <HeroSection content={content.hero} />
     <ServicesSection content={content.services} locale={content.locale} />
     <ProofSection content={content.proof} />
+    <AboutSection content={content.about} />
     <ContactSection content={content.contact} />
     <ContactDetailsSection content={content.contact.details} />
     <SiteFooter

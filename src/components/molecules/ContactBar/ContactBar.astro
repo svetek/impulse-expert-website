@@ -13,10 +13,20 @@ const { phone, address } = siteConfig.contact;
 
 <div class:list={[styles['contact-bar']]}>
     <div class:list={['shell', styles['contact-bar-inner']]}>
-        <a class:list={[styles['prompt']]} href={contactHref}>
+        <a
+            class:list={[styles['prompt']]}
+            href={contactHref}
+            data-analytics-event="cta_click"
+            data-analytics-label="contact_bar"
+        >
             {prompt}
         </a>
-        <a class:list={[styles['contact-item']]} href={phone.href}>
+        <a
+            class:list={[styles['contact-item']]}
+            href={phone.href}
+            data-analytics-event="generate_lead"
+            data-analytics-label="phone_header"
+        >
             <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6.6 3.5 9 8.2 7.3 9.9a15.7 15.7 0 0 0 6.8 6.8l1.7-1.7 4.7 2.4v2.1a2 2 0 0 1-2 2A16 16 0 0 1 2.5 5.5a2 2 0 0 1 2-2Z"></path>
             </svg>
@@ -27,6 +37,8 @@ const { phone, address } = siteConfig.contact;
             href={address.mapUrl}
             target="_blank"
             rel="noopener noreferrer"
+            data-analytics-event="contact_click"
+            data-analytics-label="map_header"
         >
             <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path>

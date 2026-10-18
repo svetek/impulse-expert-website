@@ -33,6 +33,15 @@ export interface SiteContent {
         explore: string;
     };
     services: ServiceOfferingsContent;
+    about: {
+        eyebrow: string;
+        title: string;
+        text: string;
+        principles: Array<{
+            title: string;
+            description: string;
+        }>;
+    };
     proof: {
         title: string;
         metricsLabel: string;

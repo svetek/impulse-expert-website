@@ -1,0 +1,37 @@
+---
+import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
+import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+import styles from './AboutSection.module.css';
+
+interface Props {
+    content: SiteContent['about'];
+}
+
+const { content } = Astro.props;
+---
+
+<section
+    class:list={[styles['about']]}
+    id="about"
+    aria-labelledby="about-title"
+>
+    <div class:list={['shell', styles['about-inner']]}>
+        <header class:list={[styles['heading']]}>
+            <Eyebrow tone="accent">{content.eyebrow}</Eyebrow>
+            <h2 id="about-title">{content.title}</h2>
+            <p>{content.text}</p>
+        </header>
+
+        <div class:list={[styles['principles']]}>
+            {content.principles.map((principle, index) => (
+                <article>
+                    <span aria-hidden="true">
+                        {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <h3>{principle.title}</h3>
+                    <p>{principle.description}</p>
+                </article>
+            ))}
+        </div>
+    </div>
+</section>

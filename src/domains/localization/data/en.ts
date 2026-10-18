@@ -5,9 +5,9 @@ export const en = {
     locale: 'en',
     siteName: 'Impulse Expert',
     seo: {
-        title: 'Impulse Expert — Cloud, Kubernetes, Web3 & AI Infrastructure',
+        title: 'Managed DevOps & Cloud Infrastructure | Impulse Expert',
         description:
-            'Secure, scalable cloud, Kubernetes, Web3 and AI infrastructure: architecture, deployment, monitoring and compliance-ready operations.',
+            'Managed DevOps, cloud and Kubernetes services for product teams: architecture, migration, automation, monitoring, security and ongoing operations.',
         socialImageAlt: 'Glowing cloud infrastructure network',
     },
     header: {
@@ -34,17 +34,17 @@ export const en = {
         },
     },
     hero: {
-        eyebrow: 'Reliable infrastructure for innovators',
-        title: 'Build without',
-        accent: 'limits',
-        text: 'We deploy, manage and secure infrastructure for Web3, cloud and AI — so your team can focus on what matters.',
+        eyebrow: 'Managed infrastructure for product teams',
+        title: 'Managed cloud & DevOps',
+        accent: 'for product teams',
+        text: 'Extend your team with senior infrastructure expertise. We architect, migrate, manage and secure cloud, Kubernetes, Web3 and AI workloads.',
         talk: 'Talk to an Expert',
         explore: 'Explore Services',
     },
     services: {
         eyebrow: 'Designed for what comes next',
-        title: 'Infrastructure for what’s next',
-        intro: 'From decentralized networks to enterprise cloud and AI workloads, we deliver secure, scalable and high-performance infrastructure for innovative teams.',
+        title: 'Managed infrastructure services',
+        intro: 'Use us as a delivery partner for a defined project or as an ongoing infrastructure team across cloud, Kubernetes, Web3, compliance and AI workloads.',
         expertise: 'Our Expertise',
         learnMore: 'Learn more',
         items: [
@@ -52,8 +52,19 @@ export const en = {
                 id: ServiceId.Infrastructure,
                 short: 'Cloud Infrastructure',
                 kicker: 'Cloud architecture',
-                title: 'Cloud Infrastructure',
+                title: 'Managed Cloud Infrastructure',
                 text: 'Flexible and secure cloud environments, designed around the way your team builds and grows.',
+                seoTitle:
+                    'Managed Cloud Infrastructure Services — Impulse Expert',
+                seoDescription:
+                    'Managed AWS, Azure and GCP infrastructure services for product teams: architecture, migration, automation, monitoring, backup and ongoing cloud operations.',
+                audience:
+                    'Product and engineering teams that need senior cloud ownership, a migration partner or dependable day-to-day operations without building a full internal platform team.',
+                engagements: [
+                    'Cloud architecture and migration projects',
+                    'Ongoing managed cloud operations',
+                    'Reliability, cost and security improvements',
+                ],
                 items: [
                     'Multi-cloud across AWS, Azure & GCP',
                     'Scalable compute and storage',
@@ -78,8 +89,19 @@ export const en = {
                 id: ServiceId.Kubernetes,
                 short: 'Kubernetes & DevOps',
                 kicker: 'Platform engineering',
-                title: 'Kubernetes & Containers',
+                title: 'Kubernetes & Managed DevOps',
                 text: 'Production-ready Kubernetes environments for scalable and resilient workloads.',
+                seoTitle:
+                    'Kubernetes Consulting & Managed DevOps — Impulse Expert',
+                seoDescription:
+                    'Kubernetes consulting and managed DevOps services: cluster architecture, migration, CI/CD, GitOps, observability, security and production support.',
+                audience:
+                    'Engineering teams adopting Kubernetes, stabilizing an existing platform or adding experienced DevOps capacity without extending the hiring cycle.',
+                engagements: [
+                    'Kubernetes design and production migration',
+                    'CI/CD, GitOps and platform automation',
+                    'Managed operations and reliability support',
+                ],
                 items: [
                     'Kubernetes cluster setup',
                     'Container orchestration',
@@ -104,8 +126,19 @@ export const en = {
                 id: ServiceId.Web3,
                 short: 'Web3 & Nodes',
                 kicker: 'Decentralized systems',
-                title: 'Web3 & Node Infrastructure',
+                title: 'Managed Web3 & Node Infrastructure',
                 text: 'Run validators, RPC endpoints, rollups and production Web3 workloads on reliable, high-performance infrastructure.',
+                seoTitle:
+                    'Web3 Node & Validator Infrastructure — Impulse Expert',
+                seoDescription:
+                    'Managed Web3 infrastructure for validators, full nodes, RPC endpoints and rollups with automated deployment, monitoring, alerting and recovery.',
+                audience:
+                    'Protocols, foundations and Web3 product teams that need reliable node operations, observable RPC capacity and documented recovery procedures.',
+                engagements: [
+                    'Validator and full-node deployment',
+                    'Managed RPC and multi-chain operations',
+                    'Monitoring, incident response and recovery',
+                ],
                 items: [
                     'Validator & full node deployment',
                     'Multi-chain support',
@@ -130,8 +163,19 @@ export const en = {
                 id: ServiceId.Compliance,
                 short: 'Compliance-Ready Infrastructure',
                 kicker: 'Security by design',
-                title: 'Compliance-Ready Infrastructure',
+                title: 'Compliance-Ready Cloud Infrastructure',
                 text: 'Meet regulatory requirements with secure, auditable and resilient environments.',
+                seoTitle:
+                    'Compliance-Ready Cloud Infrastructure — Impulse Expert',
+                seoDescription:
+                    'Prepare cloud infrastructure for SOC 2 and ISO 27001 assessments with access controls, audit logging, encryption, evidence collection and recovery testing.',
+                audience:
+                    'Growing SaaS and technology companies that need infrastructure controls and operational evidence before an independent compliance assessment.',
+                engagements: [
+                    'Infrastructure control and gap assessment',
+                    'Security control implementation',
+                    'Evidence automation and readiness support',
+                ],
                 items: [
                     'ISO 27001 aligned environments',
                     'SOC 2 ready controls & monitoring',
@@ -156,8 +200,19 @@ export const en = {
                 id: ServiceId.AiInfrastructure,
                 short: 'AI Infrastructure',
                 kicker: 'Accelerated compute',
-                title: 'AI Infrastructure',
+                title: 'AI Infrastructure & MLOps',
                 text: 'High-performance infrastructure for AI and machine learning, from training to inference.',
+                seoTitle:
+                    'AI Infrastructure & MLOps Consulting — Impulse Expert',
+                seoDescription:
+                    'AI infrastructure and MLOps consulting for training and inference: GPU environments, model deployment, observability, scaling and cost optimization.',
+                audience:
+                    'AI product teams moving from experiments to repeatable production inference, or improving GPU utilization, reliability and deployment speed.',
+                engagements: [
+                    'AI workload and infrastructure assessment',
+                    'Production inference platform delivery',
+                    'MLOps automation and ongoing optimization',
+                ],
                 items: [
                     'GPU-optimized compute',
                     'Scalable AI/ML environments',
@@ -193,9 +248,8 @@ export const en = {
             breadcrumbHome: 'Home',
             breadcrumbServices: 'Services',
             capabilitiesTitle: 'What we deliver',
-            approachTitle: 'How we approach the work',
-            approachText:
-                'We start with workload, security and availability requirements, then design the architecture, automate delivery and establish observable day-to-day operations.',
+            audienceTitle: 'Who this service is for',
+            engagementsTitle: 'Ways we can work with your team',
             otherServicesTitle: 'Related infrastructure services',
             discussProject: 'Discuss your project',
             scenarioEyebrow: 'Illustrative delivery scenario',
@@ -230,6 +284,28 @@ export const en = {
                 },
             ],
         },
+    },
+    about: {
+        eyebrow: 'An extension of your engineering team',
+        title: 'Infrastructure ownership without another hiring cycle',
+        text: 'Impulse Expert works with product and engineering teams that need focused infrastructure expertise for a delivery project or ongoing operations. We work in your cloud and repositories, define responsibilities up front and leave behind documented, observable systems.',
+        principles: [
+            {
+                title: 'Built around your stack',
+                description:
+                    'Architecture and automation fit your workloads, security boundaries and delivery process instead of forcing a generic platform.',
+            },
+            {
+                title: 'Clear operational ownership',
+                description:
+                    'Scope, access, escalation paths and acceptance criteria are agreed before implementation and kept visible throughout delivery.',
+            },
+            {
+                title: 'Evidence over promises',
+                description:
+                    'Availability, recovery and performance targets are validated with monitoring, tests and documented operating procedures.',
+            },
+        ],
     },
     proof: {
         title: 'Trusted where uptime matters',

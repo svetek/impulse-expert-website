@@ -1,6 +1,7 @@
 ---
 import type { SiteContent } from '../../../domains/site/interfaces/site-content.interface';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroImagePreloads from '../../organisms/HeroSection/HeroImagePreloads.astro';
 
 interface Props {
     layout: Pick<SiteContent, 'locale' | 'siteName' | 'seo' | 'analytics'>;
@@ -11,6 +12,7 @@ const { layout, skipToContentLabel } = Astro.props;
 ---
 
 <BaseLayout {...layout}>
+    <HeroImagePreloads slot="head" />
     <a class="skip-link" href="#main">
         {skipToContentLabel}
     </a>

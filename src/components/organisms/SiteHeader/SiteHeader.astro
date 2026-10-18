@@ -59,6 +59,8 @@ const getNavigationHref = (href: string) => `${navigationBase}${href}`;
             class={styles['header-cta']}
             size="small"
             href={getNavigationHref('#contact')}
+            data-analytics-event="cta_click"
+            data-analytics-label="header_contact"
         >
             {content.talk} <span aria-hidden="true">→</span>
         </ActionLink>

@@ -4,6 +4,7 @@ import SeoHead from '../components/seo/SeoHead/SeoHead.astro';
 import { ClientRouter } from 'astro:transitions';
 import type { SiteContent } from '../domains/site/interfaces/site-content.interface';
 import type { Locale } from '../domains/localization/types/locale.type';
+import exo2FontUrl from '../assets/fonts/exo-2/Exo2-VariableFont_wght.ttf?url';
 import '../styles/fonts.css';
 import '../styles/global.css';
 
@@ -48,6 +49,14 @@ const {
             alternatePaths={alternatePaths}
             structuredData={structuredData}
         />
+        <link
+            rel="preload"
+            href={exo2FontUrl}
+            as="font"
+            type="font/ttf"
+            crossorigin
+        />
+        <slot name="head" />
         <ClientRouter />
     </head>
     <body>

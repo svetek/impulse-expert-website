@@ -51,6 +51,7 @@ const {
         <a
             class:list={[styles['text-link']]}
             href={getServicePath(locale, service.id)}
+            aria-label={`${learnMore}: ${service.title}`}
         >
             {learnMore} <span aria-hidden="true">→</span>
         </a>

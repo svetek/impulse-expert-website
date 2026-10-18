@@ -25,7 +25,12 @@ const { content, contactHref = '#contact' } = Astro.props;
             <p>{content.text}</p>
         </div>
         <div class:list={[styles['cta-actions']]}>
-            <ActionLink size="large" href={contactHref}>
+            <ActionLink
+                size="large"
+                href={contactHref}
+                data-analytics-event="cta_click"
+                data-analytics-label="contact_section"
+            >
                 {content.talk} <span aria-hidden="true">→</span>
             </ActionLink>
         </div>

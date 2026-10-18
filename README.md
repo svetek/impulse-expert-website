@@ -90,6 +90,8 @@ After deployment, accept analytics consent on the site and confirm that requests
 
 Cloudflare reads `public/_headers` from the generated assets. Security headers apply to the whole site, while hashed Astro assets use a one-year immutable browser cache.
 
+Cloudflare also reads `public/_redirects`. Keep permanent redirects from URLs on the previous site in this file so users and search engines reach the closest relevant replacement page.
+
 ## SEO routes
 
 - `/robots.txt`
@@ -100,3 +102,5 @@ Cloudflare reads `public/_headers` from the generated assets. Security headers a
 - `/services/:service/` and `/ru/services/:service/`
 
 Service pages emit canonical and reciprocal language links plus `WebPage`, `Service`, and `BreadcrumbList` JSON-LD. Global metadata includes `Organization` and `WebSite` entities. Register the production sitemap in Google Search Console, Bing Webmaster Tools, and Yandex Webmaster after deployment. Also verify that Cloudflare bot protection returns HTTP `200` to `OAI-SearchBot`; `robots.txt` explicitly permits it.
+
+After analytics consent, contact and CTA links emit `generate_lead`, `contact_click`, and `cta_click` events. Mark `generate_lead` as a key event in GA4 when phone and email clicks should count as lead intent.

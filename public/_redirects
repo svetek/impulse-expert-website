@@ -1,0 +1,5 @@
+# Preserve search and link equity from the previous Web3 site.
+/lava /services/web3-node-infrastructure/ 301
+/lava/ /services/web3-node-infrastructure/ 301
+/cardano /services/web3-node-infrastructure/ 301
+/cardano/ /services/web3-node-infrastructure/ 301
